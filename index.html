@@ -385,27 +385,76 @@ footer{max-width:1500px;margin:0 auto;padding:14px 28px;font-size:10px;color:var
       </div>
       <div class="tw">
         <table>
-          <thead><tr>
-            <th onclick="tsort('name')">Agent</th>
-            <th onclick="tsort('audits')" style="text-align:center">Audits</th>
-            <th onclick="tsort('firstCall')" style="text-align:center">1st Call</th>
-            <th onclick="tsort('callLogged')" style="text-align:center">Call Log</th>
-            <th onclick="tsort('outcome')" style="text-align:center">Outcome</th>
-            <th onclick="tsort('leadStage')" style="text-align:center">Lead Stage</th>
-            <th onclick="tsort('deal')" style="text-align:center">Deal ⚠️</th>
-            <th onclick="tsort('pipeline')" style="text-align:center">Pipeline</th>
-            <th onclick="tsort('email')" style="text-align:center">Email</th>
-            <th onclick="tsort('waUsed')" style="text-align:center">WA Used</th>
-            <th onclick="tsort('waLogged')" style="text-align:center">WA Log</th>
-            <th onclick="tsort('waNote')" style="text-align:center">WA Note</th>
-            <th onclick="tsort('task')" style="text-align:center">Task</th>
-            <th onclick="tsort('total')" style="text-align:center">Total ↕</th>
-            <th onclick="tsort('pct')">Compliance %</th>
-            <th>Status</th>
-          </tr></thead>
+          <thead>
+            <tr style="background:var(--m2)">
+              <th colspan="2"></th>
+              <th colspan="5" style="text-align:center;color:#2563eb;font-size:10px;border-bottom:2px solid #2563eb">📞 CALL (4pts each)</th>
+              <th colspan="3" style="text-align:center;color:#7c3aed;font-size:10px;border-bottom:2px solid #7c3aed">🎯 LEAD STAGE (5pts each)</th>
+              <th colspan="4" style="text-align:center;color:#dc2626;font-size:10px;border-bottom:2px solid #dc2626">💼 DEAL (8pts each)</th>
+              <th colspan="4" style="text-align:center;color:#d97706;font-size:10px;border-bottom:2px solid #d97706">📧 EMAIL (3pts each)</th>
+              <th colspan="3" style="text-align:center;color:#059669;font-size:10px;border-bottom:2px solid #059669">💬 WHATSAPP (4pts each)</th>
+              <th colspan="3" style="text-align:center;color:#6366f1;font-size:10px;border-bottom:2px solid #6366f1">✅ TASK (3pts each)</th>
+              <th colspan="3"></th>
+            </tr>
+            <tr>
+              <th onclick="tsort('name')">Agent</th>
+              <th onclick="tsort('audits')" style="text-align:center">Audits</th>
+              <th onclick="tsort('firstContact')" style="text-align:center;color:#2563eb" title="4pts deducted if No/Autofail">1st Contact<br><span style="font-size:9px;font-weight:400">-4pts</span></th>
+              <th onclick="tsort('firstCall')" style="text-align:center;color:#2563eb" title="4pts deducted if No/Autofail">1st Call Made<br><span style="font-size:9px;font-weight:400">-4pts</span></th>
+              <th onclick="tsort('callLogged')" style="text-align:center;color:#2563eb" title="4pts deducted if No/Autofail">Call Logged<br><span style="font-size:9px;font-weight:400">-4pts</span></th>
+              <th onclick="tsort('outcome')" style="text-align:center;color:#2563eb" title="4pts deducted if No/Autofail">Outcome<br><span style="font-size:9px;font-weight:400">-4pts</span></th>
+              <th onclick="tsort('callDesc')" style="text-align:center;color:#2563eb" title="4pts deducted if No/Autofail">Call Desc<br><span style="font-size:9px;font-weight:400">-4pts</span></th>
+              <th onclick="tsort('leadStage')" style="text-align:center;color:#7c3aed" title="5pts deducted if No/Autofail">Lead Stage Upd<br><span style="font-size:9px;font-weight:400">-5pts</span></th>
+              <th onclick="tsort('correctStage')" style="text-align:center;color:#7c3aed" title="5pts deducted if No/Autofail">Correct Stage<br><span style="font-size:9px;font-weight:400">-5pts</span></th>
+              <th onclick="tsort('qualifiedMark')" style="text-align:center;color:#7c3aed" title="5pts deducted if No/Autofail">Qualified Mark<br><span style="font-size:9px;font-weight:400">-5pts</span></th>
+              <th onclick="tsort('deal')" style="text-align:center;color:#dc2626" title="8pts deducted if No/Autofail">Deal Created ⚠️<br><span style="font-size:9px;font-weight:400">-8pts</span></th>
+              <th onclick="tsort('pipeline')" style="text-align:center;color:#dc2626" title="8pts deducted if No/Autofail">Pipeline<br><span style="font-size:9px;font-weight:400">-8pts</span></th>
+              <th onclick="tsort('timeline')" style="text-align:center;color:#dc2626" title="8pts deducted if No/Autofail">Timeline<br><span style="font-size:9px;font-weight:400">-8pts</span></th>
+              <th onclick="tsort('properties')" style="text-align:center;color:#dc2626" title="8pts deducted if No/Autofail">Properties<br><span style="font-size:9px;font-weight:400">-8pts</span></th>
+              <th onclick="tsort('emailSent')" style="text-align:center;color:#d97706" title="3pts deducted if No/Autofail">Email Sent<br><span style="font-size:9px;font-weight:400">-3pts</span></th>
+              <th onclick="tsort('emailHub')" style="text-align:center;color:#d97706" title="3pts deducted if No/Autofail">Email via Hub<br><span style="font-size:9px;font-weight:400">-3pts</span></th>
+              <th onclick="tsort('profTone')" style="text-align:center;color:#d97706" title="3pts deducted if No/Autofail">Prof Tone<br><span style="font-size:9px;font-weight:400">-3pts</span></th>
+              <th onclick="tsort('signature')" style="text-align:center;color:#d97706" title="3pts deducted if No/Autofail">Signature<br><span style="font-size:9px;font-weight:400">-3pts</span></th>
+              <th onclick="tsort('waUsed')" style="text-align:center;color:#059669" title="4pts deducted if No/Autofail">WA Used<br><span style="font-size:9px;font-weight:400">-4pts</span></th>
+              <th onclick="tsort('waLogged')" style="text-align:center;color:#059669" title="4pts deducted if No/Autofail">WA Logged<br><span style="font-size:9px;font-weight:400">-4pts</span></th>
+              <th onclick="tsort('waNote')" style="text-align:center;color:#059669" title="4pts deducted if No/Autofail">WA Note<br><span style="font-size:9px;font-weight:400">-4pts</span></th>
+              <th onclick="tsort('taskCreated')" style="text-align:center;color:#6366f1" title="3pts deducted if No/Autofail">Task Created<br><span style="font-size:9px;font-weight:400">-3pts</span></th>
+              <th onclick="tsort('taskDone')" style="text-align:center;color:#6366f1" title="3pts deducted if No/Autofail">Task Done<br><span style="font-size:9px;font-weight:400">-3pts</span></th>
+              <th onclick="tsort('taskType')" style="text-align:center;color:#6366f1" title="3pts deducted if No/Autofail">Task Type<br><span style="font-size:9px;font-weight:400">-3pts</span></th>
+              <th onclick="tsort('total')" style="text-align:center">Total Errors ↕</th>
+              <th onclick="tsort('pct')">Compliance %</th>
+              <th>Status</th>
+            </tr>
+          </thead>
           <tbody id="tb"></tbody>
         </table>
       </div>
+    </div>
+  </div>
+
+  <!-- ERROR WEIGHT TABLE -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="ch">
+      <div><div class="ct">⚖️ Error Weight Table</div><div class="cs">Points lost per category per agent — higher = bigger training priority</div></div>
+    </div>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Agent</th>
+            <th style="text-align:center">Audits</th>
+            <th style="text-align:center;color:#2563eb">📞 Call<br><span style="font-size:9px;font-weight:400">max 20pts</span></th>
+            <th style="text-align:center;color:#7c3aed">🎯 Lead Stage<br><span style="font-size:9px;font-weight:400">max 15pts</span></th>
+            <th style="text-align:center;color:#dc2626">💼 Deal<br><span style="font-size:9px;font-weight:400">max 32pts</span></th>
+            <th style="text-align:center;color:#d97706">📧 Email<br><span style="font-size:9px;font-weight:400">max 12pts</span></th>
+            <th style="text-align:center;color:#059669">💬 WhatsApp<br><span style="font-size:9px;font-weight:400">max 12pts</span></th>
+            <th style="text-align:center;color:#6366f1">✅ Task<br><span style="font-size:9px;font-weight:400">max 9pts</span></th>
+            <th style="text-align:center">Total Lost</th>
+            <th style="text-align:center">Compliance %</th>
+          </tr>
+        </thead>
+        <tbody id="wtb"></tbody>
+      </table>
     </div>
   </div>
 
@@ -551,7 +600,7 @@ footer{max-width:1500px;margin:0 auto;padding:14px 28px;font-size:10px;color:var
 //  API ENDPOINTS
 // ══════════════════════════════════════════════════════════════
 const APIS = {
-  hof:     'https://script.google.com/macros/s/AKfycbzW-cgCRG8dlT37STNjSMWyHnieiTAz4dTLdkhijqAufh4F79OBVUyzjdQq-IzV8XQzGw/exec',
+  hof:     'https://script.google.com/macros/s/AKfycbxOgP65UyTnp2mX9_TSZGY74h-ttcCHrz3kiCBMLozByL2r4x1m9UtO7W1LEWf4MjHYgw/exec',
   daily:   'https://script.google.com/macros/s/AKfycbxJ_k2y-pxzOqxQX4PJELkB1I_gmWh_2Q4zwm1dLs6wm4i4nS-0-KhvuEDefRVsI58/exec',
   weekly:  'https://script.google.com/macros/s/AKfycbwK4gEWIifhebKDUGDxFJ29M09y6uhaLDIrfinbenFvoCWLkghr0fiKbmjFq-r0FQ8X9Q/exec',
   monthly: 'https://script.google.com/macros/s/AKfycbxLpaXQ72VN9THPElisLrh9KrOAfljDJoNUxBpphsjbsdQiLfVmdK1NuS2g8i8d3I4E/exec'
@@ -685,6 +734,12 @@ async function hofFetch() {
       task:       +d.task||0,
       total:      +d.total||0,
       pct:          +d.pct||0,
+      wCall:        +d.wCall||0,
+      wLeadStage:   +d.wLeadStage||0,
+      wDeal:        +d.wDeal||0,
+      wEmail:       +d.wEmail||0,
+      wWhatsApp:    +d.wWhatsApp||0,
+      wTask:        +d.wTask||0,
       firstContact: +d.firstContact||0,
       callDesc:     +d.callDesc||0,
       correctStage: +d.correctStage||0,
@@ -816,17 +871,25 @@ function hofRenderTable(data) {
     const sc = d.total>15?'r':d.total>5?'a':'g';
     const sl = d.total>15?'🔴 REPEAT':d.total>5?'🟡 COACHING':'🟢 OK';
     const pc = d.pct>=90?'#059669':d.pct>=80?'#d97706':'#dc2626';
-    return `<tr onclick="showAgentRadar('${d.name.replace(/'/g,"\'")}')" style="cursor:pointer" title="Click to see ${d.name} skill gap">
-      <td style="font-weight:600;color:var(--ac)">${d.name} <span style="font-size:10px;color:var(--mu)">↗</span></td>
+    const ec = n => n>0 ? `<span style="color:${n>=3?'#dc2626':n>=1?'#d97706':'inherit'};font-weight:700">${n}</span>` : '<span style="color:#94a3b8">—</span>';
+    return `<tr onclick="showAgentRadar('${d.name.replace(/'/g,"\'")}')" style="cursor:pointer" title="Click for ${d.name} skill gap">
+      <td style="font-weight:600;color:var(--ac);white-space:nowrap">${d.name} <span style="font-size:10px;color:var(--mu)">↗</span></td>
       <td class="tm" style="color:var(--ac);font-weight:600">${d.audits}</td>
-      <td class="tm">${v(d.firstCall)}</td><td class="tm">${v(d.callLogged)}</td>
-      <td class="tm">${v(d.outcome)}</td><td class="tm">${v(d.leadStage)}</td>
-      <td class="tm" style="${d.deal>0?'color:var(--red);font-weight:700':''}">${v(d.deal)}</td>
-      <td class="tm">${v(d.pipeline)}</td><td class="tm">${v(d.email)}</td>
-      <td class="tm">${v(d.waUsed)}</td><td class="tm">${v(d.waLogged)}</td>
-      <td class="tm">${v(d.waNote)}</td><td class="tm">${v(d.task)}</td>
+      <td class="tm" style="border-left:2px solid rgba(37,99,235,.2)">${ec(d.firstContact)}</td>
+      <td class="tm">${ec(d.firstCall)}</td><td class="tm">${ec(d.callLogged)}</td>
+      <td class="tm">${ec(d.outcome)}</td><td class="tm">${ec(d.callDesc)}</td>
+      <td class="tm" style="border-left:2px solid rgba(124,58,237,.2)">${ec(d.leadStage)}</td>
+      <td class="tm">${ec(d.correctStage)}</td><td class="tm">${ec(d.qualifiedMark)}</td>
+      <td class="tm" style="border-left:2px solid rgba(220,38,38,.2)">${ec(d.deal)}</td>
+      <td class="tm">${ec(d.pipeline)}</td><td class="tm">${ec(d.timeline)}</td><td class="tm">${ec(d.properties)}</td>
+      <td class="tm" style="border-left:2px solid rgba(217,119,6,.2)">${ec(d.emailSent)}</td>
+      <td class="tm">${ec(d.emailHub)}</td><td class="tm">${ec(d.profTone)}</td><td class="tm">${ec(d.signature)}</td>
+      <td class="tm" style="border-left:2px solid rgba(5,150,105,.2)">${ec(d.waUsed)}</td>
+      <td class="tm">${ec(d.waLogged)}</td><td class="tm">${ec(d.waNote)}</td>
+      <td class="tm" style="border-left:2px solid rgba(99,102,241,.2)">${ec(d.taskCreated)}</td>
+      <td class="tm">${ec(d.taskDone)}</td><td class="tm">${ec(d.taskType)}</td>
       <td class="tm" style="color:${d.total>15?'var(--red)':d.total>5?'var(--amb)':'var(--grn)'};font-weight:700;font-size:14px">${d.total}</td>
-      <td><div class="pc"><span style="color:${pc};font-weight:600;font-family:'DM Mono',monospace;font-size:12px">${d.pct.toFixed(1)}%</span><div class="pb2"><div class="pbf" style="width:${Math.min(d.pct,100)}%;background:${pc}"></div></div></div></td>
+      <td><div class="pc"><span style="color:${pc};font-weight:700;font-family:'DM Mono',monospace;font-size:13px">${d.pct.toFixed(1)}%</span><div class="pb2"><div class="pbf" style="width:${Math.min(d.pct,100)}%;background:${pc}"></div></div></div></td>
       <td><span class="pill p${sc}">${sl}</span></td>
     </tr>`;
   }).join('');
@@ -1058,6 +1121,71 @@ function showAgentRadar(name) {
 function closeAgentRadar() {
   document.getElementById('agentRadarCard').style.display = 'none';
   if (agentRadarInst) { agentRadarInst.destroy(); agentRadarInst = null; }
+}
+
+// ── Error Weight Table ───────────────────────────────────────────────────────
+function renderWeightTable() {
+  const wtb = document.getElementById('wtb');
+  if (!wtb) return;
+  if (!HOF_filtered.length) { wtb.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:16px;color:var(--mu)">No data</td></tr>'; return; }
+
+  const MAX = { call:20, lead:15, deal:32, email:12, wa:12, task:9 };
+
+  // Sort by total points lost descending
+  const sorted = HOF_filtered.slice().sort((a,b) => (b.wCall+b.wLeadStage+b.wDeal+b.wEmail+b.wWhatsApp+b.wTask) - (a.wCall+a.wLeadStage+a.wDeal+a.wEmail+a.wWhatsApp+a.wTask));
+
+  const wc = (val, max) => {
+    const pct = val / (max * (HOF_filtered.find(x=>x===HOF_filtered[0])?.audits||1) || 1);
+    const col = val===0?'#059669':val<=max?'#d97706':'#dc2626';
+    return val===0 ? '<span style="color:#94a3b8">—</span>' : `<span style="color:${col};font-weight:700">${val}</span>`;
+  };
+
+  wtb.innerHTML = sorted.map(d => {
+    const total = d.wCall + d.wLeadStage + d.wDeal + d.wEmail + d.wWhatsApp + d.wTask;
+    const pc = d.pct>=90?'#059669':d.pct>=80?'#d97706':'#dc2626';
+    // Per-audit averages
+    const a = d.audits || 1;
+    const wc2 = (val, max) => {
+      const avg = (val/a).toFixed(1);
+      const col = val===0?'#94a3b8':val/a >= max*0.5?'#dc2626':val/a >= max*0.2?'#d97706':'#059669';
+      return val===0
+        ? '<span style="color:#94a3b8">—</span>'
+        : `<span style="color:${col};font-weight:700">${val}</span><span style="color:var(--mu);font-size:10px"> (${avg}/audit)</span>`;
+    };
+    return `<tr>
+      <td style="font-weight:600">${d.name}</td>
+      <td class="tm">${d.audits}</td>
+      <td class="tm">${wc2(d.wCall,MAX.call)}</td>
+      <td class="tm">${wc2(d.wLeadStage,MAX.lead)}</td>
+      <td class="tm">${wc2(d.wDeal,MAX.deal)}</td>
+      <td class="tm">${wc2(d.wEmail,MAX.email)}</td>
+      <td class="tm">${wc2(d.wWhatsApp,MAX.wa)}</td>
+      <td class="tm">${wc2(d.wTask,MAX.task)}</td>
+      <td class="tm" style="font-weight:700;color:${total===0?'#059669':total<=20?'#d97706':'#dc2626'}">${total}</td>
+      <td class="tm"><span style="color:${pc};font-weight:700;font-family:'DM Mono',monospace">${d.pct.toFixed(1)}%</span></td>
+    </tr>`;
+  }).join('');
+
+  // Team totals row
+  const tt = sorted.reduce((s,d)=>({
+    wCall:s.wCall+d.wCall, wLeadStage:s.wLeadStage+d.wLeadStage, wDeal:s.wDeal+d.wDeal,
+    wEmail:s.wEmail+d.wEmail, wWhatsApp:s.wWhatsApp+d.wWhatsApp, wTask:s.wTask+d.wTask
+  }), {wCall:0,wLeadStage:0,wDeal:0,wEmail:0,wWhatsApp:0,wTask:0});
+  const ttotal = tt.wCall+tt.wLeadStage+tt.wDeal+tt.wEmail+tt.wWhatsApp+tt.wTask;
+  const tavg = HOF_filtered.length ? HOF_filtered.reduce((s,d)=>s+d.pct,0)/HOF_filtered.length : 0;
+  const tpc = tavg>=90?'#059669':tavg>=80?'#d97706':'#dc2626';
+  wtb.innerHTML += `<tr style="background:var(--m2);font-weight:700;border-top:2px solid var(--m3)">
+    <td>📊 TEAM TOTAL</td>
+    <td class="tm">${HOF_filtered.reduce((s,d)=>s+d.audits,0)}</td>
+    <td class="tm" style="color:#2563eb">${tt.wCall}</td>
+    <td class="tm" style="color:#7c3aed">${tt.wLeadStage}</td>
+    <td class="tm" style="color:#dc2626">${tt.wDeal}</td>
+    <td class="tm" style="color:#d97706">${tt.wEmail}</td>
+    <td class="tm" style="color:#059669">${tt.wWhatsApp}</td>
+    <td class="tm" style="color:#6366f1">${tt.wTask}</td>
+    <td class="tm">${ttotal}</td>
+    <td class="tm"><span style="color:${tpc};font-family:'DM Mono',monospace">${tavg.toFixed(1)}%</span></td>
+  </tr>`;
 }
 
 // Share modal
