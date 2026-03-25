@@ -3177,39 +3177,21 @@ async function sendAIMessage() {
 
   try {
     var ctx = buildDashboardContext(msg);
-    var systemPrompt = 'You are HOF Compliance AI. Answer using the dashboard data below. Be concise. Use web search automatically for UAE immigration laws, visa policies, news, or real-time info.\n\nDATA:\n' + ctx;
+    var systemPrompt = 'You are HOF Compliance AI. Answer using the dashboard data below. Be concise.\n\nDATA:\n' + ctx;
 
-    var messages = aiHistory.slice(-4);
-
-    var userContent = [];
-    if (aiFile && aiFileData) {
-      var mtype = aiFile.type || 'application/octet-stream';
-      if (mtype === 'application/pdf') {
-        userContent.push({ type:'document', source:{ type:'base64', media_type:'application/pdf', data:aiFileData } });
-      } else {
-        userContent.push({ type:'text', text:'[File: ' + aiFile.name + ']' });
-      }
-      clearAIFile();
-    }
-    if (msg) userContent.push({ type:'text', text:msg });
-
-    var userMsg = (userContent.length === 1 && userContent[0].type === 'text') ? userContent[0].text : userContent;
-    messages.push({ role:'user', content: userMsg });
-
-    var response = await fetch('https://api.anthropic.com/v1/messages', {
+    // Use the Groq API instead of Anthropic
+    var response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': window.HOF_ANTHROPIC_KEY || '',
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
+        'Authorization': 'Bearer ' + (window.GROQ_API_KEY || '')
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 800,
-        system: systemPrompt,
-        tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-        messages: messages
+        model: 'llama-3.3-70b-versatile', // Groq's best model
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: msg }
+        ]
       })
     });
 
@@ -3221,15 +3203,11 @@ async function sendAIMessage() {
 
     var data = await response.json();
     var reply = '';
-    if (data.content && data.content.length) {
-      data.content.forEach(function(block) {
-        if (block.type === 'text' && block.text) reply += block.text;
-      });
+    if (data.choices && data.choices[0] && data.choices[0].message) {
+      reply = data.choices[0].message.content;
     }
+    
     if (!reply) reply = 'Sorry, I could not get a response.';
-
-    aiHistory.push({ role:'user', content: msg || '[file]' });
-    aiHistory.push({ role:'assistant', content: reply });
 
     var typingEl = document.getElementById(typingId);
     if (typingEl) typingEl.remove();
@@ -3243,24 +3221,7 @@ async function sendAIMessage() {
 
   sendBtn.disabled = false;
 }
-
-function addAIMessage(text, role) {
-  var msgs = document.getElementById('aiMessages');
-  var div  = document.createElement('div');
-  div.className = 'ai-msg ai-' + role;
-  div.innerHTML = '<div class="ai-bubble">' + text.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>') + '</div>';
-  msgs.appendChild(div);
-  scrollAIToBottom();
-}
-
-function scrollAIToBottom() {
-  var msgs = document.getElementById('aiMessages');
-  setTimeout(function(){ msgs.scrollTop = msgs.scrollHeight; }, 50);
-}
-
-window.onerror = function(msg,src,line){ hideLdr(); console.error('JS error: '+msg+' line '+line); };
-setTimeout(function(){ ldrCount=0; hideLdr(); }, 15000); // hard fallback
-
+  
 // Check URL for range before first fetch
 (()=>{ const p=new URLSearchParams(location.search); if(p.has('range')) activeRange=p.get('range'); })();
 // ── Header clock ──
