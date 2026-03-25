@@ -3156,30 +3156,36 @@ window.GROQ_API_KEY = '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'
 async function sendAIMessage() {
   var input = document.getElementById('aiInput');
   var msg   = input.value.trim();
-  if (!msg && !aiFile) return;
+  
+  // 1. Stop if empty
+  if (!msg) return;
 
-  var displayMsg = msg || ('📎 ' + (aiFile ? aiFile.name : ''));
-  addAIMessage(displayMsg, 'user');
+  // 2. UI Updates
+  addAIMessage(msg, 'user');
   input.value = '';
   input.style.height = '42px';
-  document.getElementById('aiSuggestions').style.display = 'none';
+  if(document.getElementById('aiSuggestions')) {
+    document.getElementById('aiSuggestions').style.display = 'none';
+  }
 
   var sendBtn = document.getElementById('aiSendBtn');
   sendBtn.disabled = true;
 
+  // 3. Show Typing Indicator
   var typingId = 'typing_' + Date.now();
   var typingDiv = document.createElement('div');
-  typingDiv.id = typingId;
+  typingId.id = typingId;
   typingDiv.className = 'ai-msg ai-assistant';
   typingDiv.innerHTML = '<div class="ai-typing"><span></span><span></span><span></span></div>';
   document.getElementById('aiMessages').appendChild(typingDiv);
   scrollAIToBottom();
 
   try {
-    var ctx = buildDashboardContext(msg);
-    var systemPrompt = 'You are HOF Compliance AI. Answer using the dashboard data below. Be concise.\n\nDATA:\n' + ctx;
+    // 4. Get Dashboard Data
+    var ctx = (typeof buildDashboardContext === 'function') ? buildDashboardContext(msg) : "No data";
+    var systemPrompt = 'You are HOF Compliance AI. Answer using the dashboard data. Be concise.\n\nDATA:\n' + ctx;
 
-    // Use the Groq API instead of Anthropic
+    // 5. Groq API Call
     var response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -3187,7 +3193,7 @@ async function sendAIMessage() {
         'Authorization': 'Bearer ' + (window.GROQ_API_KEY || '')
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile', // Groq's best model
+        model: 'llama-3.3-70b-versatile',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: msg }
@@ -3195,31 +3201,26 @@ async function sendAIMessage() {
       })
     });
 
-    if (!response.ok) {
-      var errData = await response.json().catch(function(){ return {}; });
-      var errMsg = (errData.error && errData.error.message) ? errData.error.message : 'HTTP ' + response.status;
-      throw new Error(errMsg);
-    }
-
     var data = await response.json();
-    var reply = '';
-    if (data.choices && data.choices[0] && data.choices[0].message) {
-      reply = data.choices[0].message.content;
-    }
     
-    if (!reply) reply = 'Sorry, I could not get a response.';
-
+    // Remove typing bubble
     var typingEl = document.getElementById(typingId);
     if (typingEl) typingEl.remove();
-    addAIMessage(reply, 'assistant');
+
+    if (response.ok && data.choices && data.choices[0]) {
+      addAIMessage(data.choices[0].message.content, 'assistant');
+    } else {
+      throw new Error(data.error ? data.error.message : 'Groq API Error');
+    }
 
   } catch(err) {
     var typingEl = document.getElementById(typingId);
     if (typingEl) typingEl.remove();
     addAIMessage('Error: ' + err.message, 'assistant');
+  } finally {
+    // 6. ALWAYS Re-enable the button
+    sendBtn.disabled = false;
   }
-
-  sendBtn.disabled = false;
 }
   
 // Check URL for range before first fetch
