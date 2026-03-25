@@ -3258,3 +3258,108 @@ setTimeout(function(){ loadCM('monthly'); }, 1500);
 </script>
 </body>
 </html>
+<script>
+(function() {
+    // 1. SET YOUR MASTER KEY HERE
+    window.GROQ_API_KEY = 'YOUR_GROQ_KEY_HERE'; 
+    window.aiHistory = window.aiHistory || [];
+
+    console.log("HOF Intelligence: System hijacking in progress...");
+
+    // 2. THE BRAIN: OVERWRITE THE SEND FUNCTION
+    window.sendAIMessage = async function() {
+        const input = document.getElementById('aiInput');
+        const btn = document.getElementById('aiSendBtn');
+        const msg = input ? input.value.trim() : "";
+
+        if (!msg || (btn && btn.disabled)) return;
+
+        // UI: Add User Message
+        if (typeof addAIMessage === 'function') {
+            addAIMessage(msg, 'user');
+        }
+        
+        input.value = '';
+        if (btn) btn.disabled = true;
+
+        // UI: Create "Analysing" Indicator
+        const tid = 't_' + Date.now();
+        const container = document.getElementById('aiMessages');
+        if (container) {
+            const tDiv = document.createElement('div');
+            tDiv.id = tid;
+            tDiv.className = 'ai-msg ai-assistant';
+            tDiv.innerHTML = '<div class="ai-bubble" style="color:#6366f1; font-family:DM Mono,monospace; font-size:11px;">SYNCING COMMAND CENTRE...</div>';
+            container.appendChild(tDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        try {
+            // Context Scraper: Grabs your table data for the AI
+            let contextData = "";
+            if (typeof buildDashboardContext === 'function') {
+                contextData = buildDashboardContext();
+            } else {
+                // Fallback scraper if function is missing in your thousands of lines
+                const kpis = document.querySelectorAll('.kv');
+                kpis.forEach(k => contextData += k.innerText + " ");
+            }
+
+            const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + window.GROQ_API_KEY,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: "llama-3.3-70b-versatile",
+                    messages: [
+                        { 
+                          role: "system", 
+                          content: "You are HOF AI. Use this Dashboard Data: " + contextData 
+                        },
+                        ...window.aiHistory.slice(-6),
+                        { role: "user", content: msg }
+                    ],
+                    temperature: 0.2
+                })
+            });
+
+            const data = await response.json();
+            
+            // Clear Indicator
+            const tEl = document.getElementById(tid);
+            if (tEl) tEl.remove();
+
+            if (response.ok && data.choices) {
+                const reply = data.choices[0].message.content;
+                if (typeof addAIMessage === 'function') {
+                    addAIMessage(reply, 'assistant');
+                }
+                window.aiHistory.push({ role: "user", content: msg }, { role: "assistant", content: reply });
+            } else {
+                const err = data.error ? data.error.message : "API Link Broken";
+                if (typeof addAIMessage === 'function') addAIMessage("ERROR: " + err, 'assistant');
+            }
+        } catch (err) {
+            const tEl = document.getElementById(tid);
+            if (tEl) tEl.remove();
+            if (typeof addAIMessage === 'function') addAIMessage("OFFLINE: Check Groq Key.", 'assistant');
+        } finally {
+            if (btn) btn.disabled = false;
+        }
+    };
+
+    // 3. FIX THE "X" CLOSE BUTTON IF IT'S BROKEN
+    window.toggleAIChat = function() {
+        const drawer = document.getElementById('aiDrawer');
+        const overlay = document.getElementById('aiOverlay');
+        if (!drawer) return;
+        const isOpen = drawer.style.right === '0px';
+        drawer.style.right = isOpen ? '-520px' : '0px';
+        if (overlay) overlay.style.display = isOpen ? 'none' : 'block';
+    };
+
+    console.log("HOF Intelligence: Override Complete. Groq is now Active.");
+})();
+</script>
