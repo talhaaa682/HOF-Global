@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>HOF — Compliance Command Centre</title>
+<script src="config.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <!-- ── AI ASSISTANT DRAWER ─────────────────────────────────────────── -->
 <div id="aiOverlay" onclick="toggleAIChat()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:999;backdrop-filter:blur(2px)"></div>
@@ -3156,7 +3157,6 @@ function buildDashboardContext(question) {
 // Model: llama-3.3-70b-versatile (fastest, most capable open model)
 // ══════════════════════════════════════════════════════════════════════════════
 
-const GROQ_API_KEY = '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';
 const GROQ_MODEL = 'llama-3.3-70b-versatile';
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
