@@ -4941,50 +4941,48 @@ function buildDashboardContext(question) {
   if (!HOF_ALL || !HOF_ALL.length) return 'No dashboard data loaded yet.';
 
   var q = (question || '').toLowerCase();
-  var catNames = {outcome:'Outcome',call:'Call',leadStage:'Lead Stage',deal:'Deal',email:'Email',whatsapp:'WhatsApp',task:'Task'};
-  var topCat = ['outcome','call','leadStage','deal','email','whatsapp','task'];
+
+  // NEW 10 CATEGORIES — must match Apps Script output exactly
+  var catNames = {
+    call:        'Call',
+    whatsapp:    'WhatsApp',
+    email:       'Email',
+    description: 'Description',
+    leadStage:   'Lead Stage',
+    outcome:     'Outcome',
+    deal:        'Deal',
+    pipeline:    'Pipeline',
+    task:        'Task',
+    timely:      'Timely'
+  };
+
+  var topCat = Object.keys(catNames);
 
   var dataset = HOF_filtered && HOF_filtered.length ? HOF_filtered : HOF_ALL;
-  var totalAud = dataset.reduce(function(s,d){ return s+d.audits; },0);
-  var avgPct   = (dataset.reduce(function(s,d){ return s+d.pct; },0)/dataset.length).toFixed(1);
-  var atRisk   = dataset.filter(function(d){ return d.pct<80; }).length;
-  var catErrs  = topCat.map(function(c){ return {name:catNames[c],errs:dataset.reduce(function(s,d){ return s+(d['catErr_'+c]||0);},0)}; });
-  catErrs.sort(function(a,b){ return b.errs-a.errs; });
-  var currentLabel = (document.getElementById('ltxt') ? document.getElementById('ltxt').textContent : 'Current Period') || 'Current Period';
+  var totalAud = dataset.reduce((s,d) => s + (d.audits||0), 0);
+  var avgPct   = dataset.length ? (dataset.reduce((s,d) => s + (d.pct||0), 0) / dataset.length).toFixed(1) : '0';
+  var atRisk   = dataset.filter(d => (d.pct||0) < 80).length;
 
-  var header = 'HOF Dashboard | ' + currentLabel + ' | Agents:' + dataset.length + ' | Avg:' + avgPct + '% | AtRisk:' + atRisk + ' | Audits:' + totalAud;
-  var catLine = 'TopErrors: ' + catErrs.slice(0,4).map(function(c){ return c.name+':'+c.errs; }).join(', ');
+  var catErrs = topCat.map(c => ({
+    name: catNames[c],
+    errs: dataset.reduce((s,d) => s + (d['catErr_'+c]||0), 0)
+  })).sort((a,b) => b.errs - a.errs);
 
-  var agentParts = dataset.slice().sort(function(a,b){ return a.pct-b.pct; }).map(function(d){
-    var cats = topCat.filter(function(c){ return (d['catErr_'+c]||0)>0; })
-                     .map(function(c){ return catNames[c]+':'+(d['catErr_'+c]); }).join(',');
-    var sop = d.mismatchQualNoDeal > 0 ? ('|SOP:'+d.mismatchQualNoDeal) : '';
-    var catPart = cats ? ('|'+cats) : '';
-    return d.name+'|'+d.pct.toFixed(0)+'%|'+d.total+'err|'+d.audits+'aud'+catPart+sop;
-  });
+  var currentLabel = document.getElementById('ltxt')?.textContent || 'Current Period';
 
-  var lines = [header, catLine, '', 'Consultants:'].concat(agentParts);
+  var header = `HOF Dashboard | ${currentLabel} | Agents:${dataset.length} | Avg:${avgPct}% | AtRisk:${atRisk} | Audits:${totalAud}`;
+  var catLine = 'Top Errors: ' + catErrs.slice(0,5).map(c => `${c.name}:${c.errs}`).join(', ');
 
-  var needsTrend = /improv|declin|trend|history|last month|previous|compar|progress|worst.*month|best.*month|month.over/i.test(q);
-  if (needsTrend) {
-    var hasTrend = HOF_ALL.some(function(d){ return d.trend && d.trend.length > 1; });
-    if (hasTrend) {
-      var improved = HOF_ALL.map(function(d){
-        if (!d.trend || d.trend.length < 2) return null;
-        var last = d.trend[d.trend.length-1];
-        var prev = d.trend[d.trend.length-2];
-        var delta = ((last.pct||0) - (prev.pct||0)).toFixed(1);
-        var sign = parseFloat(delta) > 0 ? '+' : '';
-        return d.name + ': ' + sign + delta + '% (' + (prev.month||'prev') + ' to ' + (last.month||'last') + ')';
-      }).filter(Boolean);
-      improved.sort(function(a,b){ return parseFloat(b.split(': ')[1]) - parseFloat(a.split(': ')[1]); });
-      lines.push('');
-      lines.push('Trend (latest vs prev month):');
-      improved.forEach(function(x){ lines.push(x); });
-    }
-  }
+  var agentParts = dataset.slice()
+    .sort((a,b) => (a.pct||0) - (b.pct||0))
+    .map(d => {
+      var cats = topCat.filter(c => (d['catErr_'+c]||0) > 0)
+                       .map(c => `${catNames[c]}:${d['catErr_'+c]}`).join(',');
+      var sop = (d.mismatchQualNoDeal > 0) ? `|SOP:${d.mismatchQualNoDeal}` : '';
+      return `${d.name}|${(d.pct||0).toFixed(0)}%|${d.total||0}err|${d.audits||0}aud|${cats}${sop}`;
+    });
 
-  return lines.join('\n');
+  return [header, catLine, '', 'Consultants:'].concat(agentParts).join('\n');
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
