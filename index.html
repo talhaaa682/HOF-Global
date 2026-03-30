@@ -72,6 +72,7 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>const HOF_API_URL = "https://script.google.com/macros/s/AKfycbww96DtE2-Ui1C_y5iXg_ZwgOZJ4WFUwLg3Dy8EL8_2GBf8AgYOTPxdMhazW_24wNLTiA/exec";</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <style>
@@ -2147,12 +2148,32 @@ function getBounds(range) {
   return {s, e};
 }
 
-async function hofFetch(silent=false) {
-  document.getElementById('eb').classList.remove('on');
-  if (!silent) {
-    showLdr('Fetching live data from Google Sheet…');
-    showSkeleton();
+async function hofFetch(silent = false) {
+  if (!silent) showLdr();
+  try {
+    const url = HOF_API_URL + "?type=dashboard";
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("HTTP " + response.status);
+    const json = await response.json();
+    if (!json.ok) throw new Error(json.error || "API error");
+    
+    HOF_ALL = json.data || [];
+    
+    // Render the HOF tab (keep your existing render calls)
+    if (typeof renderHOFTable === 'function') renderHOFTable();
+    if (typeof updateKPIs === 'function') updateKPIs();
+    if (typeof renderMainTable === 'function') renderMainTable(); // if you have this
+    
+    if (!silent) {
+      hideLdr();
+      showToast("✅ HOF Consultant data loaded successfully");
+    }
+  } catch (err) {
+    console.error("HOF Fetch Error:", err);
+    hideLdr();
+    showToast("❌ Failed to load HOF data: " + err.message, true);
   }
+} 
 
   const {s,e} = getBounds(activeRange);
   let url = APIS.hof;
@@ -4939,10 +4960,7 @@ function aiAsk(question) {
 
 function buildDashboardContext(question) {
   if (!HOF_ALL || !HOF_ALL.length) return 'No dashboard data loaded yet.';
-
-  var q = (question || '').toLowerCase();
-
-  // NEW 10 CATEGORIES — must match Apps Script output exactly
+  
   var catNames = {
     call:        'Call',
     whatsapp:    'WhatsApp',
@@ -4955,24 +4973,22 @@ function buildDashboardContext(question) {
     task:        'Task',
     timely:      'Timely'
   };
-
+  
   var topCat = Object.keys(catNames);
-
   var dataset = HOF_filtered && HOF_filtered.length ? HOF_filtered : HOF_ALL;
   var totalAud = dataset.reduce((s,d) => s + (d.audits||0), 0);
   var avgPct   = dataset.length ? (dataset.reduce((s,d) => s + (d.pct||0), 0) / dataset.length).toFixed(1) : '0';
   var atRisk   = dataset.filter(d => (d.pct||0) < 80).length;
-
+  
   var catErrs = topCat.map(c => ({
     name: catNames[c],
     errs: dataset.reduce((s,d) => s + (d['catErr_'+c]||0), 0)
   })).sort((a,b) => b.errs - a.errs);
-
+  
   var currentLabel = document.getElementById('ltxt')?.textContent || 'Current Period';
-
   var header = `HOF Dashboard | ${currentLabel} | Agents:${dataset.length} | Avg:${avgPct}% | AtRisk:${atRisk} | Audits:${totalAud}`;
   var catLine = 'Top Errors: ' + catErrs.slice(0,5).map(c => `${c.name}:${c.errs}`).join(', ');
-
+  
   var agentParts = dataset.slice()
     .sort((a,b) => (a.pct||0) - (b.pct||0))
     .map(d => {
@@ -4981,7 +4997,7 @@ function buildDashboardContext(question) {
       var sop = (d.mismatchQualNoDeal > 0) ? `|SOP:${d.mismatchQualNoDeal}` : '';
       return `${d.name}|${(d.pct||0).toFixed(0)}%|${d.total||0}err|${d.audits||0}aud|${cats}${sop}`;
     });
-
+    
   return [header, catLine, '', 'Consultants:'].concat(agentParts).join('\n');
 }
 
@@ -5804,6 +5820,7 @@ function startAutoRefresh() {
   }, AUTO_REFRESH_MS);
 }
 startAutoRefresh();
+window.addEventListener('load', () => hofFetch());
 </script>
 </body>
 </html>
