@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>HOF — Compliance Command Centre</title>
-<script src="config.js"></script>
+<script src="config.js"></https://script.google.com/macros/s/AKfycbyfpLAfPCTA-ylhCzmk6jV8C0DZFdHp2zIIKw3c557gcJmW7tYQeKhmFfJZ74BwM_ElQg/exec>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <!-- ── AI ASSISTANT DRAWER ─────────────────────────────────────────── -->
 <div id="aiOverlay" onclick="toggleAIChat()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:999;backdrop-filter:blur(2px)"></div>
@@ -72,7 +72,6 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-<script>const HOF_API_URL = "https://script.google.com/macros/s/AKfycbww96DtE2-Ui1C_y5iXg_ZwgOZJ4WFUwLg3Dy8EL8_2GBf8AgYOTPxdMhazW_24wNLTiA/exec";</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <style>
@@ -874,39 +873,51 @@ footer{
           <thead>
             <tr style="background:var(--m2)">
               <th colspan="2"></th>
-              <th colspan="5" style="text-align:center;color:#2563eb;font-size:10px;border-bottom:2px solid #2563eb">📞 CALL (4pts each)</th>
-              <th colspan="3" style="text-align:center;color:#7c3aed;font-size:10px;border-bottom:2px solid #7c3aed">🎯 LEAD STAGE (5pts each)</th>
-              <th colspan="4" style="text-align:center;color:#dc2626;font-size:10px;border-bottom:2px solid #dc2626">💼 DEAL (8pts each)</th>
-              <th colspan="4" style="text-align:center;color:#d97706;font-size:10px;border-bottom:2px solid #d97706">📧 EMAIL (3pts each)</th>
+              <th colspan="3" style="text-align:center;color:#2563eb;font-size:10px;border-bottom:2px solid #2563eb">📞 CALL (4pts each)</th>
               <th colspan="3" style="text-align:center;color:#059669;font-size:10px;border-bottom:2px solid #059669">💬 WHATSAPP (4pts each)</th>
+              <th colspan="3" style="text-align:center;color:#d97706;font-size:10px;border-bottom:2px solid #d97706">📧 EMAIL (3pts each)</th>
+              <th colspan="1" style="text-align:center;color:#64748b;font-size:10px;border-bottom:2px solid #64748b">📝 DESC</th>
+              <th colspan="2" style="text-align:center;color:#7c3aed;font-size:10px;border-bottom:2px solid #7c3aed">🎯 LEAD STAGE (5pts each)</th>
+              <th colspan="3" style="text-align:center;color:#e11d48;font-size:10px;border-bottom:2px solid #e11d48">📊 OUTCOME (4pts each)</th>
+              <th colspan="3" style="text-align:center;color:#dc2626;font-size:10px;border-bottom:2px solid #dc2626">💼 DEAL (8pts each)</th>
               <th colspan="3" style="text-align:center;color:#6366f1;font-size:10px;border-bottom:2px solid #6366f1">✅ TASK (3pts each)</th>
+              <th colspan="1" style="text-align:center;color:#0891b2;font-size:10px;border-bottom:2px solid #0891b2">⏱ FOLLOW UP</th>
               <th colspan="3"></th>
             </tr>
             <tr>
               <th onclick="tsort('name')">Agent</th>
               <th onclick="tsort('audits')" style="text-align:center">Audits</th>
-              <th onclick="tsort('firstContact')" style="text-align:center;color:#2563eb" title="Error = all category points lost">1st Contact<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('firstCall')" style="text-align:center;color:#2563eb" title="Error = all category points lost">1st Call Made<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('callLogged')" style="text-align:center;color:#2563eb" title="Error = all category points lost">Call Logged<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('outcome')" style="text-align:center;color:#2563eb" title="Error = all category points lost">Outcome<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('callDesc')" style="text-align:center;color:#2563eb" title="Error = all category points lost">Call Desc<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('leadStage')" style="text-align:center;color:#7c3aed" title="Error = all category points lost">Lead Stage Upd<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('correctStage')" style="text-align:center;color:#7c3aed" title="Error = all category points lost">Correct Stage<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('qualifiedMark')" style="text-align:center;color:#7c3aed" title="Error = all category points lost">Qualified Mark<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('deal')" style="text-align:center;color:#dc2626" title="Error = all category points lost">Deal Created <br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('pipeline')" style="text-align:center;color:#dc2626" title="Error = all category points lost">Pipeline<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('timeline')" style="text-align:center;color:#dc2626" title="Error = all category points lost">Timeline<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('properties')" style="text-align:center;color:#dc2626" title="Error = all category points lost">Properties<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('emailSent')" style="text-align:center;color:#d97706" title="Error = all category points lost">Email Sent<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('emailHub')" style="text-align:center;color:#d97706" title="Error = all category points lost">Email via Hub<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('profTone')" style="text-align:center;color:#d97706" title="Error = all category points lost">Prof Tone<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('signature')" style="text-align:center;color:#d97706" title="Error = all category points lost">Signature<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('waUsed')" style="text-align:center;color:#059669" title="Error = all category points lost">WA Used<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('waLogged')" style="text-align:center;color:#059669" title="Error = all category points lost">WA Logged<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('waNote')" style="text-align:center;color:#059669" title="Error = all category points lost">WA Note<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('taskCreated')" style="text-align:center;color:#6366f1" title="Error = all category points lost">Task Created<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('taskDone')" style="text-align:center;color:#6366f1" title="Error = all category points lost">Task Done<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
-              <th onclick="tsort('taskType')" style="text-align:center;color:#6366f1" title="Error = all category points lost">Task Type<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <!-- CALL (3 cols) -->
+              <th onclick="tsort('callLogged')" style="text-align:center;color:#2563eb" title="Call made and logged correctly">Call Error<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <th onclick="tsort('callDesc')" style="text-align:center;color:#2563eb" title="Call description filled correctly">Call Desc<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <th onclick="tsort('outcome')" style="text-align:center;color:#2563eb" title="Correct lead / outcome recorded">Correct Lead<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <!-- WHATSAPP (3 cols) -->
+              <th onclick="tsort('waUsed')" style="text-align:center;color:#059669" title="WhatsApp used for follow-up">WA Used<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <th onclick="tsort('waLogged')" style="text-align:center;color:#059669" title="WhatsApp conversation logged">WA Logged<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <th onclick="tsort('waNote')" style="text-align:center;color:#059669" title="WhatsApp note added">WA Note<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <!-- EMAIL (3 cols) -->
+              <th onclick="tsort('emailSent')" style="text-align:center;color:#d97706" title="Email sent to lead">Email Sent<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <th onclick="tsort('profTone')" style="text-align:center;color:#d97706" title="Professional tone used">Prof Tone<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <th onclick="tsort('signature')" style="text-align:center;color:#d97706" title="Company signature included">Company Sig<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <!-- DESCRIPTION (1 col) -->
+              <th onclick="tsort('callDesc')" style="text-align:center;color:#64748b" title="Description filled in HubSpot">Description<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <!-- LEAD STAGE (2 cols) -->
+              <th onclick="tsort('leadStage')" style="text-align:center;color:#7c3aed" title="All required lead stage fields filled">All Required<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <th onclick="tsort('correctStage')" style="text-align:center;color:#7c3aed" title="Lead stage updated correctly">Stage Updated<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <!-- OUTCOME (3 cols) -->
+              <th onclick="tsort('qualifiedMark')" style="text-align:center;color:#e11d48" title="Qualified stage marked correctly">Qualified Stage<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <th onclick="tsort('outcomeRecorded')" style="text-align:center;color:#e11d48" title="Outcome recorded in HubSpot">Outcome Rec.<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <th onclick="tsort('outcome')" style="text-align:center;color:#e11d48" title="Outcome value is correct">Outcome✓<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <!-- DEAL (3 cols) -->
+              <th onclick="tsort('deal')" style="text-align:center;color:#dc2626" title="Deal created in HubSpot">Deal Created<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <th onclick="tsort('timeline')" style="text-align:center;color:#dc2626" title="Timeline action completed">Timeline Act.<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <th onclick="tsort('pipeline')" style="text-align:center;color:#dc2626" title="Correct pipeline stage set">Pipeline ✓<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <!-- TASK (3 cols) -->
+              <th onclick="tsort('taskCreated')" style="text-align:center;color:#6366f1" title="Task created">Task Created<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <th onclick="tsort('taskDone')" style="text-align:center;color:#6366f1" title="Task completed">Task Done<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <th onclick="tsort('taskType')" style="text-align:center;color:#6366f1" title="Correct task type selected">Task Type ✓<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
+              <!-- FOLLOW UP (1 col) -->
+              <th onclick="tsort('timelyContact')" style="text-align:center;color:#0891b2" title="Timely follow-up contact made">Timely Contact<br><span style="font-size:9px;font-weight:400;color:#dc2626">all-or-none</span></th>
               <th onclick="tsort('total')" style="text-align:center">Total Errors ↕</th>
               <th onclick="tsort('pct')">Overall %</th>
               <th onclick="tsort('qualPct')" style="color:#059669" title="Compliance on Qualified cases — only shown when audited">QUALIFIED %<br><span style="font-size:9px;font-weight:400;color:var(--mu)">if audited</span></th>
@@ -932,13 +943,14 @@ footer{
           <tr>
             <th>Agent</th>
             <th style="text-align:center">Audits</th>
-            <th style="text-align:center;color:#e11d48">OUTCOME<br><span style="font-size:9px;font-weight:400;color:#94a3b8">10pts</span></th>
-            <th style="text-align:center;color:#2563eb">CALL<br><span style="font-size:9px;font-weight:400;color:#94a3b8">15pts</span></th>
-            <th style="text-align:center;color:#7c3aed">LEAD STAGE<br><span style="font-size:9px;font-weight:400;color:#94a3b8">15pts</span></th>
-            <th style="text-align:center;color:#dc2626">DEAL<br><span style="font-size:9px;font-weight:400;color:#94a3b8">30pts</span></th>
-            <th style="text-align:center;color:#d97706">EMAIL<br><span style="font-size:9px;font-weight:400;color:#94a3b8">12pts</span></th>
+            <th style="text-align:center;color:#2563eb">CALL<br><span style="font-size:9px;font-weight:400;color:#94a3b8">12pts</span></th>
             <th style="text-align:center;color:#059669">WHATSAPP<br><span style="font-size:9px;font-weight:400;color:#94a3b8">12pts</span></th>
-            <th style="text-align:center;color:#6366f1">TASK<br><span style="font-size:9px;font-weight:400;color:#94a3b8">6pts</span></th>
+            <th style="text-align:center;color:#d97706">EMAIL<br><span style="font-size:9px;font-weight:400;color:#94a3b8">9pts</span></th>
+            <th style="text-align:center;color:#7c3aed">LEAD STAGE<br><span style="font-size:9px;font-weight:400;color:#94a3b8">10pts</span></th>
+            <th style="text-align:center;color:#e11d48">OUTCOME<br><span style="font-size:9px;font-weight:400;color:#94a3b8">8pts</span></th>
+            <th style="text-align:center;color:#dc2626">DEAL<br><span style="font-size:9px;font-weight:400;color:#94a3b8">24pts</span></th>
+            <th style="text-align:center;color:#6366f1">TASK<br><span style="font-size:9px;font-weight:400;color:#94a3b8">9pts</span></th>
+            <th style="text-align:center;color:#0891b2">FOLLOW UP<br><span style="font-size:9px;font-weight:400;color:#94a3b8">4pts</span></th>
             <th style="text-align:center">Total Errors</th>
             <th style="text-align:center">Compliance %</th>
           </tr>
@@ -1472,222 +1484,602 @@ footer{
       <button onclick="copyASCode()" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;border:none;border-radius:8px;padding:7px 16px;cursor:pointer;font-size:12px;font-weight:700;box-shadow:0 2px 8px rgba(37,99,235,.3)">📋 Copy All</button>
     </div>
 
-    <pre id="asCodeBlock" style="background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px;font-size:10.5px;font-family:'DM Mono',monospace;line-height:1.75;overflow-x:auto;white-space:pre;margin:0;max-height:420px;overflow-y:auto">// ══════════════════════════════════════════════════════════
-// HOF COMPLIANCE — Apps Script  (replace your full script)
-// Auto-detects column headers — no manual counting needed
-// ══════════════════════════════════════════════════════════
+    <pre id="asCodeBlock" style="background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px;font-size:10.5px;font-family:'DM Mono',monospace;line-height:1.75;overflow-x:auto;white-space:pre;margin:0;max-height:420px;overflow-y:auto">// ══════════════════════════════════════════════════════════════════════════════
+// HOF COMPLIANCE DASHBOARD — Complete Apps Script
+// Version: 2.0  |  Updated to match RAW AUDIT NEW sheet structure (March 2026)
+//
+// SETUP:
+//   1. Open your Google Sheet → Extensions → Apps Script
+//   2. Delete ALL existing code and paste this entire file
+//   3. Update RAW_SHEET_NAME below to match your exact sheet tab name
+//   4. Deploy → New deployment → Web app
+//        Execute as: Me
+//        Who has access: Anyone
+//   5. Copy the new URL → paste into config.js  hof: &#x27;...&#x27;
+//
+// WHAT THIS RETURNS (JSON):
+//   { ok, data:[...per-consultant...], totalAudits, dateRange }
+//
+// Each consultant object includes:
+//   name, audits, pct, total, all individual error fields,
+//   catErr_* (per category), caseQualified/NoAnswer/etc,
+//   qualPct, naPct, mismatch SOP counts, trend[], errorLinks{}
+// ══════════════════════════════════════════════════════════════════════════════
 
-// ▶ UPDATE THIS to match your exact sheet tab name:
-var RAW_SHEET_NAME = 'RAW AUDIT NEW';
+// ▶ UPDATE THIS — must match your exact sheet tab name:
+var RAW_SHEET_NAME = &#x27;RAW AUDIT NEW&#x27;;
 
-// Header → internal field name mapping (add variants if your headers differ)
-var HEADER_MAP = {
-  'consultant name': '_name', 'agent name': '_name', 'name': '_name', 'consultant': '_name',
-  'case link': '_link', 'hubspot link': '_link', 'link': '_link', 'url': '_link',
-  'deal link': '_link', 'contact link': '_link', 'case url': '_link',
-  'contact name': '_cname', 'case name': '_cname', 'lead name': '_cname', 'client name': '_cname',
-  'date': '_date', 'audit date': '_date',
-  '1st contact': 'firstContact', 'first contact': 'firstContact',
-  '1st call': 'firstCall', 'first call': 'firstCall', '1st call made': 'firstCall',
-  'call logged': 'callLogged',
-  'outcome': 'outcome',
-  'call desc': 'callDesc', 'call description': 'callDesc',
-  'lead stage': 'leadStage', 'lead stage updated': 'leadStage', 'lead stage upd': 'leadStage',
-  'correct stage': 'correctStage',
-  'qualified mark': 'qualifiedMark', 'qualified': 'qualifiedMark',
-  'deal created': 'deal', 'deal': 'deal',
-  'pipeline': 'pipeline',
-  'timeline': 'timeline',
-  'properties': 'properties',
-  'email sent': 'emailSent',
-  'email via hub': 'emailHub', 'email via hubspot': 'emailHub',
-  'prof tone': 'profTone', 'professional tone': 'profTone',
-  'signature': 'signature',
-  'wa used': 'waUsed', 'whatsapp used': 'waUsed',
-  'wa logged': 'waLogged', 'whatsapp logged': 'waLogged',
-  'wa note': 'waNote', 'whatsapp note': 'waNote',
-  'task created': 'taskCreated',
-  'task done': 'taskDone',
-  'task type': 'taskType',
+// ── SCORING: points lost per error (used to compute compliance %) ─────────────
+// Total possible per audit = sum of all weights below = 100 pts
+var FIELD_WEIGHTS = {
+  // CALL (12 pts total)
+  callLogged:       4,   // Call Error
+  callDesc:         4,   // Description / Call Desc
+  outcome:          4,   // Correct Lead / Outcome
+  // WHATSAPP (12 pts total)
+  waUsed:           4,   // WA Used
+  waLogged:         4,   // WA Logged / WA App Logged
+  waNote:           4,   // WA Note
+  // EMAIL (9 pts total)
+  emailSent:        3,   // Email Sent
+  profTone:         3,   // Professional Tone
+  signature:        3,   // Company Signature
+  // LEAD STAGE (10 pts total)
+  leadStage:        5,   // All Required fields filled
+  correctStage:     5,   // Lead Stage Updated correctly
+  // OUTCOME (8 pts total)
+  qualifiedMark:    4,   // Qualified Stage marked correctly
+  outcomeRecorded:  4,   // Outcome Not Recorded (No = error)
+  // DEAL (24 pts total)
+  deal:             8,   // Deal Created in HubSpot
+  timeline:         8,   // Timeline Action completed
+  pipeline:         8,   // Correct Pipeline Stage set
+  // TASK (9 pts total)
+  taskCreated:      3,   // Task Created
+  taskDone:         3,   // Task Completed / Done
+  taskType:         3,   // Task Type Match
+  // FOLLOW UP (4 pts total)
+  timelyContact:    4,   // Timely Contact made
+  // LEGACY fields (kept for sheets still using old columns — weight 0 so no double-count)
+  firstContact:     0,
+  firstCall:        0,
+  properties:       0,
+  emailHub:         0,
 };
 
-var ERROR_FIELDS = [
-  'firstContact','firstCall','callLogged','outcome','callDesc',
-  'leadStage','correctStage','qualifiedMark',
-  'deal','pipeline','timeline','properties',
-  'emailSent','emailHub','profTone','signature',
-  'waUsed','waLogged','waNote',
-  'taskCreated','taskDone','taskType'
-];
+// Total possible points per audit (auto-calculated from weights)
+var MAX_PTS_PER_AUDIT = Object.values(FIELD_WEIGHTS).reduce(function(s, v) { return s + v; }, 0);
 
+// ── COLUMN HEADER → internal field name ──────────────────────────────────────
+// Covers all current headers + common typos/variants + legacy headers
+var HEADER_MAP = {
+  // Identity
+  &#x27;consultant name&#x27;:       &#x27;_name&#x27;,
+  &#x27;agent name&#x27;:            &#x27;_name&#x27;,
+  &#x27;name&#x27;:                  &#x27;_name&#x27;,
+  &#x27;consultant&#x27;:            &#x27;_name&#x27;,
+  // Audit date
+  &#x27;audit date&#x27;:            &#x27;_date&#x27;,
+  &#x27;date&#x27;:                  &#x27;_date&#x27;,
+  // Case link (for clickable error drill-down)
+  &#x27;case link&#x27;:             &#x27;_link&#x27;,
+  &#x27;hubspot link&#x27;:          &#x27;_link&#x27;,
+  &#x27;link&#x27;:                  &#x27;_link&#x27;,
+  &#x27;url&#x27;:                   &#x27;_link&#x27;,
+  &#x27;deal link&#x27;:             &#x27;_link&#x27;,
+  &#x27;contact link&#x27;:          &#x27;_link&#x27;,
+  &#x27;case url&#x27;:              &#x27;_link&#x27;,
+  // Contact/case name (shown in drill-down modal)
+  &#x27;contact name&#x27;:          &#x27;_cname&#x27;,
+  &#x27;case name&#x27;:             &#x27;_cname&#x27;,
+  &#x27;lead name&#x27;:             &#x27;_cname&#x27;,
+  &#x27;client name&#x27;:           &#x27;_cname&#x27;,
+  &#x27;occupation&#x27;:            &#x27;_occupation&#x27;,
+  // Lead stage (for SOP mismatch detection)
+  &#x27;lead stage&#x27;:            &#x27;_leadStageVal&#x27;,
+  &#x27;lead stage (value)&#x27;:    &#x27;_leadStageVal&#x27;,
+  // Auditor
+  &#x27;auditor&#x27;:               &#x27;_auditor&#x27;,
+  // First Contact Type (Call / WhatsApp etc)
+  &#x27;first contact type&#x27;:    &#x27;_contactType&#x27;,
+  &#x27;first contact&#x27;:         &#x27;_contactType&#x27;,
+
+  // ── COMMUNICATION ──────────────────────────────────────────────────────────
+  // Call Error (col D in current sheet)
+  &#x27;call error&#x27;:            &#x27;callLogged&#x27;,
+  &#x27;call made&#x27;:             &#x27;callLogged&#x27;,
+  &#x27;call logged&#x27;:           &#x27;callLogged&#x27;,
+  // Description Error
+  &#x27;description&#x27;:           &#x27;callDesc&#x27;,
+  &#x27;call desc&#x27;:             &#x27;callDesc&#x27;,
+  &#x27;call description&#x27;:      &#x27;callDesc&#x27;,
+  // Correct Lead / Outcome
+  &#x27;correct lead&#x27;:          &#x27;outcome&#x27;,
+  &#x27;outcome&#x27;:               &#x27;outcome&#x27;,
+
+  // WhatsApp Error (cols E-G)
+  &#x27;whatsapp u&#x27;:            &#x27;waUsed&#x27;,
+  &#x27;wa used&#x27;:               &#x27;waUsed&#x27;,
+  &#x27;whatsapp used&#x27;:         &#x27;waUsed&#x27;,
+  &#x27;whatsapp app logged&#x27;:   &#x27;waLogged&#x27;,
+  &#x27;wa logged&#x27;:             &#x27;waLogged&#x27;,
+  &#x27;whatsapp logged&#x27;:       &#x27;waLogged&#x27;,
+  &#x27;wa note&#x27;:               &#x27;waNote&#x27;,
+  &#x27;whatsapp note&#x27;:         &#x27;waNote&#x27;,
+
+  // Email Error (cols H-J)
+  &#x27;email sent&#x27;:            &#x27;emailSent&#x27;,
+  &#x27;professional&#x27;:          &#x27;profTone&#x27;,
+  &#x27;prof tone&#x27;:             &#x27;profTone&#x27;,
+  &#x27;professional tone&#x27;:     &#x27;profTone&#x27;,
+  &#x27;company sig&#x27;:           &#x27;signature&#x27;,
+  &#x27;company signature&#x27;:     &#x27;signature&#x27;,
+  &#x27;signature&#x27;:             &#x27;signature&#x27;,
+
+  // ── DOCUMENTATION ──────────────────────────────────────────────────────────
+  // (Description mapped above under callDesc)
+
+  // ── LEAD STAGE ERROR ───────────────────────────────────────────────────────
+  &#x27;all required&#x27;:          &#x27;leadStage&#x27;,
+  &#x27;lead stage updated&#x27;:    &#x27;correctStage&#x27;,
+  &#x27;correct stage&#x27;:         &#x27;correctStage&#x27;,
+
+  // ── OUTCOME ERROR ──────────────────────────────────────────────────────────
+  &#x27;qualified stage&#x27;:       &#x27;qualifiedMark&#x27;,
+  &#x27;qualified mark&#x27;:        &#x27;qualifiedMark&#x27;,
+  &#x27;qualified&#x27;:             &#x27;qualifiedMark&#x27;,
+  &#x27;outcome not recorded&#x27;:  &#x27;outcomeRecorded&#x27;,
+  &#x27;outcome recorded&#x27;:      &#x27;outcomeRecorded&#x27;,
+  &#x27;no&#x27;:                    &#x27;outcomeRecorded&#x27;,   // some sheets use &quot;No&quot; header for this col
+
+  // ── DEAL ERROR ─────────────────────────────────────────────────────────────
+  &#x27;deal created&#x27;:          &#x27;deal&#x27;,
+  &#x27;deal&#x27;:                  &#x27;deal&#x27;,
+  &#x27;timeline act&#x27;:          &#x27;timeline&#x27;,
+  &#x27;timeline action&#x27;:       &#x27;timeline&#x27;,
+  &#x27;timeline&#x27;:              &#x27;timeline&#x27;,
+  &#x27;correct pipeline&#x27;:      &#x27;pipeline&#x27;,
+  &#x27;pipeline correct&#x27;:      &#x27;pipeline&#x27;,
+  &#x27;correct pipeline set&#x27;:  &#x27;pipeline&#x27;,
+  &#x27;pipline error&#x27;:         &#x27;pipeline&#x27;,
+  &#x27;pipeline&#x27;:              &#x27;pipeline&#x27;,
+
+  // ── TASK ERROR ─────────────────────────────────────────────────────────────
+  &#x27;task created&#x27;:          &#x27;taskCreated&#x27;,
+  &#x27;task complete&#x27;:         &#x27;taskDone&#x27;,
+  &#x27;task completed&#x27;:        &#x27;taskDone&#x27;,
+  &#x27;task done&#x27;:             &#x27;taskDone&#x27;,
+  &#x27;task type match&#x27;:       &#x27;taskType&#x27;,
+  &#x27;task type&#x27;:             &#x27;taskType&#x27;,
+
+  // ── FOLLOW UP ──────────────────────────────────────────────────────────────
+  &#x27;timely contact&#x27;:        &#x27;timelyContact&#x27;,
+  &#x27;timely&#x27;:                &#x27;timelyContact&#x27;,
+
+  // ── LEGACY (old column names — zero weight, kept for compat) ───────────────
+  &#x27;1st contact&#x27;:           &#x27;firstContact&#x27;,
+  &#x27;first contact type&#x27;:    &#x27;firstContact&#x27;,
+  &#x27;1st call&#x27;:              &#x27;firstCall&#x27;,
+  &#x27;1st call made&#x27;:         &#x27;firstCall&#x27;,
+  &#x27;call logged (legacy)&#x27;:  &#x27;firstCall&#x27;,
+  &#x27;properties&#x27;:            &#x27;properties&#x27;,
+  &#x27;email via hub&#x27;:         &#x27;emailHub&#x27;,
+  &#x27;email via hubspot&#x27;:     &#x27;emailHub&#x27;,
+};
+
+// All error field names (active + legacy)
+var ALL_ERROR_FIELDS = Object.keys(FIELD_WEIGHTS);
+
+// ── CASE TYPE DETECTION ───────────────────────────────────────────────────────
+// Looks at the &quot;Lead Stage&quot; value column to classify case type
+function getCaseType(leadStageVal) {
+  var v = String(leadStageVal || &#x27;&#x27;).trim().toLowerCase();
+  if (v.includes(&#x27;qualif&#x27;))                          return &#x27;qualified&#x27;;
+  if (v.includes(&#x27;no answer&#x27;) || v.includes(&#x27;no ans&#x27;) || v === &#x27;na&#x27;) return &#x27;noAnswer&#x27;;
+  if (v.includes(&#x27;cannot dial&#x27;) || v.includes(&#x27;cant dial&#x27;) || v.includes(&#x27;can\&#x27;t dial&#x27;)) return &#x27;cannotDial&#x27;;
+  if (v.includes(&#x27;ineligible&#x27;))                      return &#x27;ineligible&#x27;;
+  return &#x27;other&#x27;;
+}
+
+// ── ERROR VALUE DETECTION ─────────────────────────────────────────────────────
+// Returns true if cell value counts as an error
+function isError(val) {
+  var v = String(val || &#x27;&#x27;).trim().toLowerCase();
+  return v === &#x27;1&#x27; || v === &#x27;yes&#x27; || v === &#x27;x&#x27; || v === &#x27;true&#x27; || v === &#x27;no&#x27;;
+  // Note: &#x27;no&#x27; handles &quot;Outcome Not Recorded&quot; column where &quot;No&quot; = error
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// doGet — main entry point called by the dashboard fetch
+// ══════════════════════════════════════════════════════════════════════════════
 function doGet(e) {
   try {
-    var params = e ? e.parameter : {};
-    var startStr = params.start || '';
-    var endStr   = params.end   || '';
+    var params    = e ? e.parameter : {};
+    var action    = params.action    || &#x27;data&#x27;;
+    var startStr  = params.start     || &#x27;&#x27;;
+    var endStr    = params.end       || &#x27;&#x27;;
+
     var startDate = startStr ? new Date(startStr) : null;
     var endDate   = endStr   ? new Date(endStr)   : null;
-    if (endDate) endDate.setHours(23, 59, 59);
+    if (endDate) endDate.setHours(23, 59, 59, 999);
 
-    var ss        = SpreadsheetApp.getActiveSpreadsheet();
-    var rawSheet  = ss.getSheetByName(RAW_SHEET_NAME);
+    var ss       = SpreadsheetApp.getActiveSpreadsheet();
+    var rawSheet = ss.getSheetByName(RAW_SHEET_NAME);
 
-    // Build errorLinks from raw audit sheet
-    var errorLinks = rawSheet ? buildErrorLinks(rawSheet, startDate, endDate) : {};
+    if (!rawSheet) {
+      return jsonResponse({ ok: false, error: &#x27;Sheet &quot;&#x27; + RAW_SHEET_NAME + &#x27;&quot; not found. Check RAW_SHEET_NAME in the script.&#x27; });
+    }
 
-    // ── Build your aggregated data here (keep your existing logic) ──────
-    // This example reads from the same raw sheet and aggregates per consultant.
-    // If you already have a separate aggregation sheet/function, merge errorLinks there.
-    var agentData = aggregateFromRawSheet(rawSheet, startDate, endDate, errorLinks);
+    // ── Case links action (lightweight — just return errorLinks) ──────────────
+    if (action === &#x27;caseLinks&#x27;) {
+      var links = buildErrorLinks(rawSheet, startDate, endDate);
+      return jsonResponse({ ok: true, errorLinks: links });
+    }
 
-    var output = {
-      ok: true,
-      data: agentData,
-      totalAudits: agentData.reduce(function(s,d){ return s + d.audits; }, 0),
-      dateRange: { min: startStr || 'All time', max: endStr || 'present' }
-    };
+    // ── Main data action ──────────────────────────────────────────────────────
+    var result = buildDashboardData(rawSheet, startDate, endDate);
+    return jsonResponse({
+      ok:          true,
+      data:        result.agents,
+      totalAudits: result.totalAudits,
+      dateRange:   { min: startStr || &#x27;All time&#x27;, max: endStr || &#x27;present&#x27; }
+    });
 
-    return ContentService
-      .createTextOutput(JSON.stringify(output))
-      .setMimeType(ContentService.MimeType.JSON);
-
-  } catch(err) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ ok: false, error: err.message }))
-      .setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return jsonResponse({ ok: false, error: err.message + &#x27; | Stack: &#x27; + (err.stack || &#x27;&#x27;) });
   }
 }
 
-// ── Build errorLinks map from raw audit sheet ─────────────────────────────
-function buildErrorLinks(sheet, startDate, endDate) {
-  var data    = sheet.getDataRange().getValues();
-  var headers = data[0].map(function(h){ return String(h||'').trim().toLowerCase(); });
+function jsonResponse(obj) {
+  return ContentService
+    .createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}
 
-  // Auto-detect column indices from headers
+// ══════════════════════════════════════════════════════════════════════════════
+// buildDashboardData — reads RAW AUDIT NEW, aggregates per consultant
+// ══════════════════════════════════════════════════════════════════════════════
+function buildDashboardData(sheet, startDate, endDate) {
+  var data    = sheet.getDataRange().getValues();
+  if (data.length &lt; 2) return { agents: [], totalAudits: 0 };
+
+  // ── Auto-detect columns from header row ────────────────────────────────────
+  // Row 1 (index 0) = group headers (Communication, Documentation, etc.)
+  // Row 2 (index 1) = actual column headers
+  // Try row 2 first; fall back to row 1 if row 2 is empty/merged
+  var headerRowIdx = 1;
+  var headerRow    = data[1].map(function(h) { return String(h || &#x27;&#x27;).trim().toLowerCase(); });
+  var hasRealHeaders = headerRow.some(function(h) { return h.length &gt; 1; });
+  if (!hasRealHeaders) {
+    headerRowIdx = 0;
+    headerRow    = data[0].map(function(h) { return String(h || &#x27;&#x27;).trim().toLowerCase(); });
+  }
+  var dataStartRow = headerRowIdx + 1;
+
+  // Map header → column index
   var col = {};
-  headers.forEach(function(h, i) {
+  headerRow.forEach(function(h, i) {
+    if (!h) return;
     var mapped = HEADER_MAP[h];
-    if (mapped && col[mapped] === undefined) col[mapped] = i;
+    if (mapped &amp;&amp; col[mapped] === undefined) col[mapped] = i;
   });
 
-  // Fuzzy fallback for name and link columns
-  if (col['_name'] === undefined) {
-    headers.forEach(function(h,i){
-      if ((h.includes('name') || h.includes('consultant') || h.includes('agent')) && col['_name']===undefined) col['_name'] = i;
+  // Fuzzy fallback for essential columns if not found by exact match
+  if (col[&#x27;_name&#x27;] === undefined) {
+    headerRow.forEach(function(h, i) {
+      if (col[&#x27;_name&#x27;] !== undefined) return;
+      if (h.includes(&#x27;consultant&#x27;) || h.includes(&#x27;agent&#x27;) || h.includes(&#x27;name&#x27;)) col[&#x27;_name&#x27;] = i;
     });
   }
-  if (col['_link'] === undefined) {
-    headers.forEach(function(h,i){
-      if ((h.includes('link') || h.includes('url') || h.includes('hubspot') || h.includes('http')) && col['_link']===undefined) col['_link'] = i;
+  if (col[&#x27;_date&#x27;] === undefined) {
+    headerRow.forEach(function(h, i) {
+      if (col[&#x27;_date&#x27;] !== undefined) return;
+      if (h.includes(&#x27;date&#x27;) || h.includes(&#x27;audit&#x27;)) col[&#x27;_date&#x27;] = i;
+    });
+  }
+  if (col[&#x27;_link&#x27;] === undefined) {
+    headerRow.forEach(function(h, i) {
+      if (col[&#x27;_link&#x27;] !== undefined) return;
+      if (h.includes(&#x27;link&#x27;) || h.includes(&#x27;url&#x27;) || h.includes(&#x27;hubspot&#x27;)) col[&#x27;_link&#x27;] = i;
+    });
+  }
+
+  // ── Main aggregation ───────────────────────────────────────────────────────
+  var agents      = {};   // { name: agentObj }
+  var errorLinks  = {};   // { name: { field: [{url,name,date}] } }
+  var totalAudits = 0;
+
+  for (var i = dataStartRow; i &lt; data.length; i++) {
+    var row  = data[i];
+    var name = col[&#x27;_name&#x27;] !== undefined ? String(row[col[&#x27;_name&#x27;]] || &#x27;&#x27;).trim() : &#x27;&#x27;;
+    if (!name || name === &#x27;Consultant&#x27;) continue;  // skip blank rows and repeated headers
+
+    // ── Date filter ──────────────────────────────────────────────────────────
+    var rowDate = null;
+    if (col[&#x27;_date&#x27;] !== undefined &amp;&amp; row[col[&#x27;_date&#x27;]]) {
+      var rawDate = row[col[&#x27;_date&#x27;]];
+      rowDate = rawDate instanceof Date ? rawDate : new Date(rawDate);
+      if (isNaN(rowDate.getTime())) rowDate = null;
+    }
+    if (startDate &amp;&amp; rowDate &amp;&amp; rowDate &lt; startDate) continue;
+    if (endDate   &amp;&amp; rowDate &amp;&amp; rowDate &gt; endDate)   continue;
+
+    // ── Init agent ───────────────────────────────────────────────────────────
+    if (!agents[name]) {
+      agents[name] = {
+        name:        name,
+        audits:      0,
+        total:       0,
+        ptsLost:     0,
+        // Individual error counts
+        callLogged:       0, callDesc:        0, outcome:         0,
+        waUsed:           0, waLogged:        0, waNote:          0,
+        emailSent:        0, profTone:        0, signature:       0,
+        leadStage:        0, correctStage:    0,
+        qualifiedMark:    0, outcomeRecorded: 0,
+        deal:             0, timeline:        0, pipeline:        0,
+        taskCreated:      0, taskDone:        0, taskType:        0,
+        timelyContact:    0,
+        // Legacy
+        firstContact:     0, firstCall:       0, properties:      0, emailHub: 0,
+        // Case type counts
+        caseQualified:    0, caseNoAnswer:    0, caseCannotDial:  0,
+        caseIneligible:   0, caseOther:       0,
+        // Per-case-type pts lost (for separate compliance %)
+        qualPtsLost:      0, qualMaxPts:      0,
+        naPtsLost:        0,  naMaxPts:        0,
+        // SOP mismatches
+        mismatchQualNoDeal:     0,
+        mismatchDealWrongStage: 0,
+        mismatchQualWrongStage: 0,
+        // Monthly trend accumulator: { &#x27;Mar 2026&#x27;: {ptsLost, maxPts, audits} }
+        _monthlyMap: {},
+      };
+      errorLinks[name] = {};
+    }
+
+    var agent = agents[name];
+    agent.audits++;
+    totalAudits++;
+
+    // ── Detect case type ─────────────────────────────────────────────────────
+    var leadStageVal = col[&#x27;_leadStageVal&#x27;] !== undefined ? row[col[&#x27;_leadStageVal&#x27;]] : &#x27;&#x27;;
+    var caseType     = getCaseType(leadStageVal);
+    agent[&#x27;case&#x27; + caseType.charAt(0).toUpperCase() + caseType.slice(1)]++;
+
+    // ── Count errors and pts lost ─────────────────────────────────────────────
+    var rowPtsLost = 0;
+    var caseLink   = {
+      url:  col[&#x27;_link&#x27;]  !== undefined ? String(row[col[&#x27;_link&#x27;]]  || &#x27;&#x27;).trim() : &#x27;&#x27;,
+      name: col[&#x27;_cname&#x27;] !== undefined ? String(row[col[&#x27;_cname&#x27;]] || &#x27;&#x27;).trim() : (&#x27;Row &#x27; + (i + 1)),
+      date: rowDate ? Utilities.formatDate(rowDate, Session.getScriptTimeZone(), &#x27;dd MMM yyyy&#x27;) : &#x27;&#x27;
+    };
+    if (!caseLink.name) caseLink.name = &#x27;Row &#x27; + (i + 1);
+
+    ALL_ERROR_FIELDS.forEach(function(field) {
+      if (col[field] === undefined) return;
+      var cellVal = row[col[field]];
+      if (!isError(cellVal)) return;
+
+      agent[field]++;
+      agent.total++;
+
+      var pts = FIELD_WEIGHTS[field] || 0;
+      rowPtsLost  += pts;
+      agent.ptsLost += pts;
+
+      // Case links for drill-down
+      if (!errorLinks[name][field]) errorLinks[name][field] = [];
+      errorLinks[name][field].push({ url: caseLink.url, name: caseLink.name, date: caseLink.date });
+    });
+
+    // ── Per-case-type compliance accumulation ─────────────────────────────────
+    var rowMaxPts = MAX_PTS_PER_AUDIT;
+    if (caseType === &#x27;qualified&#x27;) {
+      agent.qualPtsLost += rowPtsLost;
+      agent.qualMaxPts  += rowMaxPts;
+    } else if (caseType === &#x27;noAnswer&#x27;) {
+      agent.naPtsLost += rowPtsLost;
+      agent.naMaxPts  += rowMaxPts;
+    }
+
+    // ── Monthly trend ─────────────────────────────────────────────────────────
+    if (rowDate) {
+      var monthKey = Utilities.formatDate(rowDate, Session.getScriptTimeZone(), &#x27;MMM yyyy&#x27;);
+      if (!agent._monthlyMap[monthKey]) {
+        agent._monthlyMap[monthKey] = { ptsLost: 0, maxPts: 0, audits: 0 };
+      }
+      agent._monthlyMap[monthKey].ptsLost += rowPtsLost;
+      agent._monthlyMap[monthKey].maxPts  += rowMaxPts;
+      agent._monthlyMap[monthKey].audits  ++;
+    }
+
+    // ── SOP Mismatch Detection ────────────────────────────────────────────────
+    // Qualified stage marked but no deal created
+    var hasQualifiedMark = col[&#x27;qualifiedMark&#x27;] !== undefined &amp;&amp; isError(row[col[&#x27;qualifiedMark&#x27;]]);
+    var hasDeal          = col[&#x27;deal&#x27;]          !== undefined &amp;&amp; isError(row[col[&#x27;deal&#x27;]]);
+    var hasCorrectStage  = col[&#x27;correctStage&#x27;]  !== undefined &amp;&amp; isError(row[col[&#x27;correctStage&#x27;]]);
+
+    if (caseType === &#x27;qualified&#x27; &amp;&amp; !hasDeal)         agent.mismatchQualNoDeal++;
+    if (hasDeal &amp;&amp; hasCorrectStage)                    agent.mismatchDealWrongStage++;
+    if (hasQualifiedMark &amp;&amp; hasCorrectStage)           agent.mismatchQualWrongStage++;
+  }
+
+  // ── Finalise each agent ───────────────────────────────────────────────────
+  var agentList = Object.values(agents).map(function(a) {
+    var maxPts = a.audits * MAX_PTS_PER_AUDIT;
+
+    // Overall compliance %
+    a.pct = maxPts &gt; 0 ? Math.max(0, parseFloat(((maxPts - a.ptsLost) / maxPts * 100).toFixed(2))) : 100;
+
+    // Per-case-type compliance %
+    a.qualPct = a.qualMaxPts &gt; 0 ? parseFloat(((a.qualMaxPts - a.qualPtsLost) / a.qualMaxPts * 100).toFixed(2)) : null;
+    a.naPct   = a.naMaxPts  &gt; 0 ? parseFloat(((a.naMaxPts  - a.naPtsLost)  / a.naMaxPts  * 100).toFixed(2)) : null;
+
+    // Category error counts (all-or-nothing per category)
+    a.catErr_call      = (a.callLogged||0)     + (a.callDesc||0)        + (a.outcome||0);
+    a.catErr_whatsapp  = (a.waUsed||0)         + (a.waLogged||0)        + (a.waNote||0);
+    a.catErr_email     = (a.emailSent||0)      + (a.profTone||0)        + (a.signature||0);
+    a.catErr_leadStage = (a.leadStage||0)      + (a.correctStage||0);
+    a.catErr_outcome   = (a.qualifiedMark||0)  + (a.outcomeRecorded||0);
+    a.catErr_deal      = (a.deal||0)           + (a.timeline||0)        + (a.pipeline||0);
+    a.catErr_task      = (a.taskCreated||0)    + (a.taskDone||0)        + (a.taskType||0);
+    a.catErr_followUp  = (a.timelyContact||0);
+
+    // Monthly trend array — sorted chronologically
+    a.trend = Object.keys(a._monthlyMap)
+      .sort(function(a, b) { return new Date(&#x27;01 &#x27; + a) - new Date(&#x27;01 &#x27; + b); })
+      .map(function(month) {
+        var m   = agents[a.name] ? agents[a.name]._monthlyMap[month] : a._monthlyMap[month];
+        // Re-access via _monthlyMap on the original object
+        var mo  = a._monthlyMap[month];
+        var pct = mo.maxPts &gt; 0 ? parseFloat(((mo.maxPts - mo.ptsLost) / mo.maxPts * 100).toFixed(2)) : 100;
+        return { month: month, avgPct: pct, audits: mo.audits };
+      });
+
+    // Attach error links
+    a.errorLinks = errorLinks[a.name] || {};
+
+    // Clean up internal accumulators (not needed in JSON response)
+    delete a._monthlyMap;
+    delete a.ptsLost;
+    delete a.qualPtsLost; delete a.qualMaxPts;
+    delete a.naPtsLost;   delete a.naMaxPts;
+
+    return a;
+  });
+
+  // Sort by compliance % descending
+  agentList.sort(function(a, b) { return b.pct - a.pct; });
+
+  return { agents: agentList, totalAudits: totalAudits };
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// buildErrorLinks — lightweight version (called by action=caseLinks)
+// Returns: { &#x27;Consultant Name&#x27;: { fieldName: [{url, name, date},...], ... } }
+// ══════════════════════════════════════════════════════════════════════════════
+function buildErrorLinks(sheet, startDate, endDate) {
+  var data       = sheet.getDataRange().getValues();
+  if (data.length &lt; 2) return {};
+
+  var headerRowIdx = 1;
+  var headerRow    = data[1].map(function(h) { return String(h || &#x27;&#x27;).trim().toLowerCase(); });
+  var hasHeaders   = headerRow.some(function(h) { return h.length &gt; 1; });
+  if (!hasHeaders) { headerRowIdx = 0; headerRow = data[0].map(function(h) { return String(h || &#x27;&#x27;).trim().toLowerCase(); }); }
+
+  var col = {};
+  headerRow.forEach(function(h, i) {
+    if (!h) return;
+    var mapped = HEADER_MAP[h];
+    if (mapped &amp;&amp; col[mapped] === undefined) col[mapped] = i;
+  });
+  if (col[&#x27;_name&#x27;] === undefined) {
+    headerRow.forEach(function(h, i) {
+      if (col[&#x27;_name&#x27;] !== undefined) return;
+      if (h.includes(&#x27;consultant&#x27;) || h.includes(&#x27;agent&#x27;) || h.includes(&#x27;name&#x27;)) col[&#x27;_name&#x27;] = i;
     });
   }
 
   var errorLinks = {};
 
-  for (var i = 1; i < data.length; i++) {
+  for (var i = headerRowIdx + 1; i &lt; data.length; i++) {
     var row  = data[i];
-    var name = String(row[col['_name']] || '').trim();
-    if (!name) continue;
+    var name = col[&#x27;_name&#x27;] !== undefined ? String(row[col[&#x27;_name&#x27;]] || &#x27;&#x27;).trim() : &#x27;&#x27;;
+    if (!name || name === &#x27;Consultant&#x27;) continue;
 
-    // Date filter
-    if (startDate || endDate) {
-      var d = new Date(row[col['_date']]);
-      if (isNaN(d)) continue;
-      if (startDate && d < startDate) continue;
-      if (endDate   && d > endDate)   continue;
+    var rowDate = null;
+    if (col[&#x27;_date&#x27;] !== undefined &amp;&amp; row[col[&#x27;_date&#x27;]]) {
+      var rd = row[col[&#x27;_date&#x27;]];
+      rowDate = rd instanceof Date ? rd : new Date(rd);
+      if (isNaN(rowDate.getTime())) rowDate = null;
     }
+    if (startDate &amp;&amp; rowDate &amp;&amp; rowDate &lt; startDate) continue;
+    if (endDate   &amp;&amp; rowDate &amp;&amp; rowDate &gt; endDate)   continue;
 
-    var link = {
-      url:  col['_link']  !== undefined ? String(row[col['_link']]  || '').trim() : '',
-      name: col['_cname'] !== undefined ? String(row[col['_cname']] || '').trim() : ('Row ' + (i + 1)),
-      date: col['_date']  !== undefined && row[col['_date']]
-              ? Utilities.formatDate(new Date(row[col['_date']]), Session.getScriptTimeZone(), 'dd MMM yyyy')
-              : ''
+    var caseLink = {
+      url:  col[&#x27;_link&#x27;]  !== undefined ? String(row[col[&#x27;_link&#x27;]]  || &#x27;&#x27;).trim() : &#x27;&#x27;,
+      name: col[&#x27;_cname&#x27;] !== undefined ? String(row[col[&#x27;_cname&#x27;]] || &#x27;&#x27;).trim() : (&#x27;Row &#x27; + (i + 1)),
+      date: rowDate ? Utilities.formatDate(rowDate, Session.getScriptTimeZone(), &#x27;dd MMM yyyy&#x27;) : &#x27;&#x27;
     };
-    if (!link.name) link.name = 'Row ' + (i + 1);
+    if (!caseLink.name) caseLink.name = &#x27;Row &#x27; + (i + 1);
 
     if (!errorLinks[name]) errorLinks[name] = {};
 
-    ERROR_FIELDS.forEach(function(field) {
+    ALL_ERROR_FIELDS.forEach(function(field) {
       if (col[field] === undefined) return;
-      var val = String(row[col[field]] || '').trim().toLowerCase();
-      var isErr = (val === '1' || val === 'yes' || val === 'x' || val === 'true');
-      if (isErr) {
-        if (!errorLinks[name][field]) errorLinks[name][field] = [];
-        errorLinks[name][field].push(link);
-      }
+      if (!isError(row[col[field]])) return;
+      if (!errorLinks[name][field]) errorLinks[name][field] = [];
+      errorLinks[name][field].push({ url: caseLink.url, name: caseLink.name, date: caseLink.date });
     });
   }
 
   return errorLinks;
 }
 
-// ── Aggregate per-consultant stats from raw sheet ────────────────────────
-// (This replaces your existing aggregation — adapt as needed)
-function aggregateFromRawSheet(sheet, startDate, endDate, errorLinks) {
-  var data    = sheet.getDataRange().getValues();
-  var headers = data[0].map(function(h){ return String(h||'').trim().toLowerCase(); });
+// ══════════════════════════════════════════════════════════════════════════════
+// SELF-TEST — Run this manually in Apps Script to verify everything works
+// Go to Apps Script editor → select &quot;selfTest&quot; → Run
+// ══════════════════════════════════════════════════════════════════════════════
+function selfTest() {
+  var ss    = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(RAW_SHEET_NAME);
+  var log   = [];
+
+  if (!sheet) {
+    Logger.log(&#x27;❌ FAIL: Sheet &quot;&#x27; + RAW_SHEET_NAME + &#x27;&quot; not found!&#x27;);
+    Logger.log(&#x27;   Available sheets: &#x27; + ss.getSheets().map(function(s){return s.getName();}).join(&#x27;, &#x27;));
+    return;
+  }
+
+  log.push(&#x27;✅ Sheet found: &#x27; + RAW_SHEET_NAME);
+
+  var data      = sheet.getDataRange().getValues();
+  var headerRow = data[1] &amp;&amp; data[1].some(function(h){return String(h).trim().length&gt;1;})
+    ? data[1].map(function(h){return String(h||&#x27;&#x27;).trim().toLowerCase();})
+    : data[0].map(function(h){return String(h||&#x27;&#x27;).trim().toLowerCase();});
 
   var col = {};
-  headers.forEach(function(h, i) {
+  headerRow.forEach(function(h,i){
     var mapped = HEADER_MAP[h];
-    if (mapped && col[mapped] === undefined) col[mapped] = i;
+    if (mapped &amp;&amp; col[mapped]===undefined) col[mapped]=i;
   });
-  if (col['_name'] === undefined) {
-    headers.forEach(function(h,i){
-      if ((h.includes('name')||h.includes('consultant')||h.includes('agent')) && col['_name']===undefined) col['_name']=i;
-    });
+
+  log.push(&#x27;📋 Total rows (including header): &#x27; + data.length);
+  log.push(&#x27;🗂️  Columns detected: &#x27; + Object.keys(col).length);
+
+  if (col[&#x27;_name&#x27;] !== undefined) log.push(&#x27;✅ Consultant column at col &#x27; + (col[&#x27;_name&#x27;]+1));
+  else                             log.push(&#x27;❌ FAIL: No consultant/name column found&#x27;);
+
+  if (col[&#x27;_date&#x27;] !== undefined) log.push(&#x27;✅ Date column at col &#x27;        + (col[&#x27;_date&#x27;]+1));
+  else                             log.push(&#x27;⚠️  No date column found (date filtering will not work)&#x27;);
+
+  if (col[&#x27;_link&#x27;] !== undefined) log.push(&#x27;✅ Case link column at col &#x27;   + (col[&#x27;_link&#x27;]+1));
+  else                             log.push(&#x27;⚠️  No case link column found (drill-down links will be empty)&#x27;);
+
+  var matchedFields = ALL_ERROR_FIELDS.filter(function(f){return col[f]!==undefined;});
+  log.push(&#x27;✅ Error fields detected (&#x27; + matchedFields.length + &#x27;/&#x27; + ALL_ERROR_FIELDS.length + &#x27;): &#x27; + matchedFields.join(&#x27;, &#x27;));
+
+  var unmapped = headerRow.filter(function(h){return h &amp;&amp; !HEADER_MAP[h] &amp;&amp; h.length&gt;2;});
+  if (unmapped.length) log.push(&#x27;ℹ️  Unmapped headers (add to HEADER_MAP if needed): &#x27; + unmapped.join(&#x27;, &#x27;));
+
+  log.push(&#x27;📊 MAX_PTS_PER_AUDIT: &#x27; + MAX_PTS_PER_AUDIT + &#x27; pts&#x27;);
+
+  var result = buildDashboardData(sheet, null, null);
+  log.push(&#x27;👥 Consultants found: &#x27; + result.agents.length);
+  log.push(&#x27;📝 Total audits: &#x27; + result.totalAudits);
+
+  if (result.agents.length &gt; 0) {
+    var top = result.agents[0];
+    log.push(&#x27;🏆 Top: &#x27; + top.name + &#x27; — &#x27; + top.pct + &#x27;% (&#x27; + top.audits + &#x27; audits)&#x27;);
+    var bot = result.agents[result.agents.length-1];
+    log.push(&#x27;⚠️  Low: &#x27; + bot.name + &#x27; — &#x27; + bot.pct + &#x27;% (&#x27; + bot.audits + &#x27; audits)&#x27;);
   }
 
-  var agents = {};
-
-  for (var i = 1; i < data.length; i++) {
-    var row  = data[i];
-    var name = String(row[col['_name']] || '').trim();
-    if (!name) continue;
-
-    if (startDate || endDate) {
-      var d = new Date(row[col['_date']]);
-      if (isNaN(d)) continue;
-      if (startDate && d < startDate) continue;
-      if (endDate   && d > endDate)   continue;
-    }
-
-    if (!agents[name]) {
-      agents[name] = { name: name, audits: 0, total: 0 };
-      ERROR_FIELDS.forEach(function(f){ agents[name][f] = 0; });
-    }
-    agents[name].audits++;
-
-    ERROR_FIELDS.forEach(function(field) {
-      if (col[field] === undefined) return;
-      var val = String(row[col[field]] || '').trim().toLowerCase();
-      if (val === '1' || val === 'yes' || val === 'x' || val === 'true') {
-        agents[name][field]++;
-        agents[name].total++;
-      }
-    });
-  }
-
-  // Calculate compliance % and attach errorLinks
-  return Object.values(agents).map(function(a) {
-    var maxPts = a.audits * 100;
-    a.pct = maxPts > 0 ? Math.max(0, Math.round(((maxPts - a.total) / maxPts) * 100)) : 100;
-    a.catErr_outcome   = a.outcome || 0;
-    a.catErr_call      = (a.firstContact||0)+(a.firstCall||0)+(a.callLogged||0)+(a.callDesc||0);
-    a.catErr_leadStage = (a.leadStage||0)+(a.correctStage||0)+(a.qualifiedMark||0);
-    a.catErr_deal      = (a.deal||0)+(a.pipeline||0)+(a.timeline||0)+(a.properties||0);
-    a.catErr_email     = (a.emailSent||0)+(a.emailHub||0)+(a.profTone||0)+(a.signature||0);
-    a.catErr_whatsapp  = (a.waUsed||0)+(a.waLogged||0)+(a.waNote||0);
-    a.catErr_task      = (a.taskCreated||0)+(a.taskDone||0)+(a.taskType||0);
-    a.errorLinks       = errorLinks[a.name] || {};
-    a.trend            = [];
-    a.mismatchQualNoDeal = 0; a.mismatchDealWrongStage = 0; a.mismatchQualWrongStage = 0;
-    a.caseQualified = 0; a.caseNoAnswer = 0; a.caseCannotDial = 0;
-    a.qualPct = null; a.naPct = null;
-    return a;
-  });
-}</pre>
+  Logger.log(&#x27;\n&#x27; + log.join(&#x27;\n&#x27;));
+  Logger.log(&#x27;\n✅ Self-test complete. If all lines show ✅, deploy and copy your URL to config.js&#x27;);
+}
+</pre>
 
     <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:12px 14px;margin-top:14px;font-size:11px;color:#166534;line-height:1.7">
       <strong>✅ What this does:</strong> The <code style="background:#bbf7d0;padding:1px 4px;border-radius:3px">buildErrorLinks()</code> function reads your RAW AUDIT sheet, auto-detects every column from its header name, and for each audit row that has an error, saves the case link + contact name + date. These are bundled into the JSON response as <code style="background:#bbf7d0;padding:1px 4px;border-radius:3px">errorLinks</code> per agent — the dashboard reads them instantly, no sheet-sharing required.
@@ -1800,50 +2192,92 @@ const RAW_COL_MAP = {
   // Date
   'date':             '_date',
   'audit date':       '_date',
-  // Error attribute columns — value of "0" = pass, "1" or non-empty = fail
+  // ── COMMUNICATION ──────────────────────────────────────────────────────
+  // Call error (single column — col D in sheet)
+  'call error':       'callLogged',
+  'call made':        'callLogged',
+  'call logged':      'callLogged',
+  // Legacy call columns (kept for backwards compatibility)
   '1st contact':      'firstContact',
   'first contact':    'firstContact',
   '1st call':         'firstCall',
   'first call':       'firstCall',
-  'call logged':      'callLogged',
-  'outcome':          'outcome',
-  'call desc':        'callDesc',
-  'call description': 'callDesc',
-  'lead stage':       'leadStage',
-  'lead stage updated':'leadStage',
-  'correct stage':    'correctStage',
-  'qualified mark':   'qualifiedMark',
-  'qualified':        'qualifiedMark',
-  'deal created':     'deal',
-  'deal':             'deal',
-  'pipeline':         'pipeline',
-  'timeline':         'timeline',
-  'properties':       'properties',
-  'email sent':       'emailSent',
-  'email via hub':    'emailHub',
-  'email via hubspot':'emailHub',
-  'prof tone':        'profTone',
-  'professional tone':'profTone',
-  'signature':        'signature',
+  // WhatsApp Error (cols E–G)
   'wa used':          'waUsed',
   'whatsapp used':    'waUsed',
+  'whatsapp u':       'waUsed',
   'wa logged':        'waLogged',
   'whatsapp logged':  'waLogged',
+  'whatsapp app logged': 'waLogged',
   'wa note':          'waNote',
   'whatsapp note':    'waNote',
+  // Email Error (cols H–J)
+  'email sent':       'emailSent',
+  'professional':     'profTone',
+  'professional tone':'profTone',
+  'prof tone':        'profTone',
+  'company sig':      'signature',
+  'company signature':'signature',
+  'signature':        'signature',
+  // Legacy email hub column
+  'email via hub':    'emailHub',
+  'email via hubspot':'emailHub',
+  // ── DOCUMENTATION ──────────────────────────────────────────────────────
+  // Description Error (col K)
+  'description':      'callDesc',
+  'call desc':        'callDesc',
+  'call description': 'callDesc',
+  // Legacy properties column
+  'properties':       'properties',
+  // ── LEAD STAGE ERROR (cols M–N) ────────────────────────────────────────
+  'all required':     'leadStage',
+  'lead stage':       'leadStage',
+  'lead stage updated':'correctStage',
+  'correct stage':    'correctStage',
+  // ── OUTCOME ERROR (cols O–P + Q) ──────────────────────────────────────
+  'qualified stage':  'qualifiedMark',
+  'qualified mark':   'qualifiedMark',
+  'qualified':        'qualifiedMark',
+  'correct lead':     'outcome',
+  'outcome':          'outcome',
+  'outcome not recorded': 'outcomeRecorded',
+  'outcome recorded': 'outcomeRecorded',
+  // ── DEAL ERROR (cols R–S) ──────────────────────────────────────────────
+  'deal created':     'deal',
+  'deal':             'deal',
+  'timeline':         'timeline',
+  'timeline act':     'timeline',
+  'timeline action':  'timeline',
+  // ── PIPELINE ERROR (col T) ────────────────────────────────────────────
+  'pipeline':         'pipeline',
+  'correct pipeline': 'pipeline',
+  'pipeline correct': 'pipeline',
+  'correct pipeline stage': 'pipeline',
+  // ── TASK ERROR (cols U–W) ─────────────────────────────────────────────
   'task created':     'taskCreated',
+  'task complete':    'taskDone',
+  'task completed':   'taskDone',
   'task done':        'taskDone',
+  'task type match':  'taskType',
   'task type':        'taskType',
+  // ── FOLLOW UP (col X) ─────────────────────────────────────────────────
+  'timely contact':   'timelyContact',
+  'timely':           'timelyContact',
 };
 
 // All attribute field names (used to detect which columns are error columns)
 const ATTR_FIELDS = new Set([
-  'firstContact','firstCall','callLogged','outcome','callDesc',
+  // Legacy (kept for backwards compat with old Apps Script responses)
+  'firstContact','firstCall','properties','emailHub',
+  // Current fields
+  'callLogged','outcome','callDesc',
   'leadStage','correctStage','qualifiedMark',
-  'deal','pipeline','timeline','properties',
-  'emailSent','emailHub','profTone','signature',
+  'outcomeRecorded',
+  'deal','pipeline','timeline',
+  'emailSent','profTone','signature',
   'waUsed','waLogged','waNote',
-  'taskCreated','taskDone','taskType'
+  'taskCreated','taskDone','taskType',
+  'timelyContact'
 ]);
 
 // ── Parse CSV respecting quoted fields ────────────────────────────────────────
@@ -2148,32 +2582,12 @@ function getBounds(range) {
   return {s, e};
 }
 
-async function hofFetch(silent = false) {
-  if (!silent) showLdr();
-  try {
-    const url = HOF_API_URL + "?type=dashboard";
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("HTTP " + response.status);
-    const json = await response.json();
-    if (!json.ok) throw new Error(json.error || "API error");
-    
-    HOF_ALL = json.data || [];
-    
-    // Render the HOF tab (keep your existing render calls)
-    if (typeof renderHOFTable === 'function') renderHOFTable();
-    if (typeof updateKPIs === 'function') updateKPIs();
-    if (typeof renderMainTable === 'function') renderMainTable(); // if you have this
-    
-    if (!silent) {
-      hideLdr();
-      showToast("✅ HOF Consultant data loaded successfully");
-    }
-  } catch (err) {
-    console.error("HOF Fetch Error:", err);
-    hideLdr();
-    showToast("❌ Failed to load HOF data: " + err.message, true);
+async function hofFetch(silent=false) {
+  document.getElementById('eb').classList.remove('on');
+  if (!silent) {
+    showLdr('Fetching live data from Google Sheet…');
+    showSkeleton();
   }
-} 
 
   const {s,e} = getBounds(activeRange);
   let url = APIS.hof;
@@ -2205,30 +2619,43 @@ async function hofFetch(silent = false) {
       audits:       +d.audits||0,
       pct:          +d.pct||0,
       total:        +d.total||0,
-      // Individual attribute errors
+      // ── Individual attribute errors ──────────────────────────────────
+      // CALL
+      callLogged:   +d.callLogged||0,
+      callDesc:     +d.callDesc||0,
+      outcome:      +d.outcome||0,
+      // Legacy call fields (kept for backwards compat)
       firstContact: +d.firstContact||0,
       firstCall:    +d.firstCall||0,
-      callLogged:   +d.callLogged||0,
-      outcome:      +d.outcome||0,
-      callDesc:     +d.callDesc||0,
-      leadStage:    +d.leadStage||0,
-      correctStage: +d.correctStage||0,
-      qualifiedMark:+d.qualifiedMark||0,
-      deal:         +d.deal||0,
-      pipeline:     +d.pipeline||0,
-      timeline:     +d.timeline||0,
-      properties:   +d.properties||0,
-      emailSent:    +d.emailSent||0,
-      emailHub:     +d.emailHub||0,
-      profTone:     +d.profTone||0,
-      signature:    +d.signature||0,
+      // WHATSAPP
       waUsed:       +d.waUsed||0,
       waLogged:     +d.waLogged||0,
       waNote:       +d.waNote||0,
+      // EMAIL
+      emailSent:    +d.emailSent||0,
+      profTone:     +d.profTone||0,
+      signature:    +d.signature||0,
+      // Legacy email hub (kept for compat)
+      emailHub:     +d.emailHub||0,
+      // LEAD STAGE
+      leadStage:    +d.leadStage||0,
+      correctStage: +d.correctStage||0,
+      // OUTCOME
+      qualifiedMark:+d.qualifiedMark||0,
+      outcomeRecorded: +d.outcomeRecorded||0,
+      // DEAL
+      deal:         +d.deal||0,
+      timeline:     +d.timeline||0,
+      pipeline:     +d.pipeline||0,
+      // Legacy properties (kept for compat)
+      properties:   +d.properties||0,
+      // TASK
       taskCreated:  +d.taskCreated||0,
       taskDone:     +d.taskDone||0,
       taskType:     +d.taskType||0,
-      // Category error counts (new - all-or-nothing per category)
+      // FOLLOW UP (new)
+      timelyContact: +d.timelyContact||0,
+      // ── Category error counts (all-or-nothing per category) ──────────
       catErr_outcome:   +d.catErr_outcome||0,
       catErr_call:      +d.catErr_call||0,
       catErr_leadStage: +d.catErr_leadStage||0,
@@ -2236,6 +2663,7 @@ async function hofFetch(silent = false) {
       catErr_email:     +d.catErr_email||0,
       catErr_whatsapp:  +d.catErr_whatsapp||0,
       catErr_task:      +d.catErr_task||0,
+      catErr_followUp:  +d.catErr_followUp||0,
       // Legacy weight fields — set to 0 (no longer used)
       wOutcome:0, wCall:0, wLeadStage:0, wDeal:0, wEmail:0, wWhatsApp:0, wTask:0,
       wpOutcome:0, wpCall:0, wpLeadStage:0, wpDeal:0, wpEmail:0, wpWhatsApp:0, wpTask:0,
@@ -2255,7 +2683,6 @@ async function hofFetch(silent = false) {
       mismatchQualWrongStage: +d.mismatchQualWrongStage||0,
       trend: Array.isArray(d.trend) ? d.trend : [],
       // Case links for errors — keyed by attribute field name
-      // Each value is an array of {url, caseName} or just strings
       errorLinks: (d.errorLinks && typeof d.errorLinks === 'object') ? d.errorLinks : {},
     }));
 
@@ -2415,13 +2842,14 @@ function hofUpdateKPIs() {
 
   // Top problem area
   const catTotals = {
-    'Outcome':    HOF_filtered.reduce((s,d)=>s+(d.catErr_outcome||0),0),
     'Call':       HOF_filtered.reduce((s,d)=>s+(d.catErr_call||0),0),
-    'Lead Stage': HOF_filtered.reduce((s,d)=>s+(d.catErr_leadStage||0),0),
-    'Deal':       HOF_filtered.reduce((s,d)=>s+(d.catErr_deal||0),0),
-    'Email':      HOF_filtered.reduce((s,d)=>s+(d.catErr_email||0),0),
     'WhatsApp':   HOF_filtered.reduce((s,d)=>s+(d.catErr_whatsapp||0),0),
+    'Email':      HOF_filtered.reduce((s,d)=>s+(d.catErr_email||0),0),
+    'Lead Stage': HOF_filtered.reduce((s,d)=>s+(d.catErr_leadStage||0),0),
+    'Outcome':    HOF_filtered.reduce((s,d)=>s+(d.catErr_outcome||0),0),
+    'Deal':       HOF_filtered.reduce((s,d)=>s+(d.catErr_deal||0),0),
     'Task':       HOF_filtered.reduce((s,d)=>s+(d.catErr_task||0),0),
+    'Follow Up':  HOF_filtered.reduce((s,d)=>s+(d.catErr_followUp||0),0),
   };
   const topCat = Object.entries(catTotals).sort((a,b)=>b[1]-a[1])[0];
   const topAgent = HOF_filtered.slice().sort((a,b)=>b.total-a.total)[0];
@@ -2510,8 +2938,8 @@ function hofUpdateKPIs() {
 
   function setText(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
 
-  const cats = ['Outcome','Call','Lead Stage','Deal','Email','WhatsApp','Task'];
-  const keys = ['catErr_outcome','catErr_call','catErr_leadStage','catErr_deal','catErr_email','catErr_whatsapp','catErr_task'];
+  const cats = ['Call','WhatsApp','Email','Lead Stage','Outcome','Deal','Task','Follow Up'];
+  const keys = ['catErr_call','catErr_whatsapp','catErr_email','catErr_leadStage','catErr_outcome','catErr_deal','catErr_task','catErr_followUp'];
   const vals = keys.map(k => HOF_filtered.reduce((s,d)=>s+(d[k]||0),0));
   const mx   = Math.max(...vals, 1);
   document.getElementById('bd').innerHTML = cats.map((c,i) =>
@@ -2549,19 +2977,33 @@ function hofRenderTable(data) {
     return `<tr onclick="showAgentRadar('${d.name.replace(/'/g,"\'")}')" style="cursor:pointer" title="Click for ${d.name} skill gap">
       <td style="font-weight:600;color:var(--ac);white-space:nowrap">${d.name} <span style="font-size:10px;color:var(--mu)">↗</span></td>
       <td class="tm" style="color:var(--ac);font-weight:600">${d.audits}</td>
-      <td class="tm" style="border-left:2px solid rgba(37,99,235,.2)">${ec(d.firstContact,'firstContact',d)}</td>
-      <td class="tm">${ec(d.firstCall,'firstCall',d)}</td><td class="tm">${ec(d.callLogged,'callLogged',d)}</td>
-      <td class="tm">${ec(d.outcome,'outcome',d)}</td><td class="tm">${ec(d.callDesc,'callDesc',d)}</td>
-      <td class="tm" style="border-left:2px solid rgba(124,58,237,.2)">${ec(d.leadStage,'leadStage',d)}</td>
-      <td class="tm">${ec(d.correctStage,'correctStage',d)}</td><td class="tm">${ec(d.qualifiedMark,'qualifiedMark',d)}</td>
-      <td class="tm" style="border-left:2px solid rgba(220,38,38,.2)">${ec(d.deal,'deal',d)}</td>
-      <td class="tm">${ec(d.pipeline,'pipeline',d)}</td><td class="tm">${ec(d.timeline,'timeline',d)}</td><td class="tm">${ec(d.properties,'properties',d)}</td>
-      <td class="tm" style="border-left:2px solid rgba(217,119,6,.2)">${ec(d.emailSent,'emailSent',d)}</td>
-      <td class="tm">${ec(d.emailHub,'emailHub',d)}</td><td class="tm">${ec(d.profTone,'profTone',d)}</td><td class="tm">${ec(d.signature,'signature',d)}</td>
+      <!-- CALL (3) -->
+      <td class="tm" style="border-left:2px solid rgba(37,99,235,.2)">${ec(d.callLogged,'callLogged',d)}</td>
+      <td class="tm">${ec(d.callDesc,'callDesc',d)}</td>
+      <td class="tm">${ec(d.outcome,'outcome',d)}</td>
+      <!-- WHATSAPP (3) -->
       <td class="tm" style="border-left:2px solid rgba(5,150,105,.2)">${ec(d.waUsed,'waUsed',d)}</td>
       <td class="tm">${ec(d.waLogged,'waLogged',d)}</td><td class="tm">${ec(d.waNote,'waNote',d)}</td>
+      <!-- EMAIL (3) -->
+      <td class="tm" style="border-left:2px solid rgba(217,119,6,.2)">${ec(d.emailSent,'emailSent',d)}</td>
+      <td class="tm">${ec(d.profTone,'profTone',d)}</td><td class="tm">${ec(d.signature,'signature',d)}</td>
+      <!-- DESCRIPTION (1) -->
+      <td class="tm" style="border-left:2px solid rgba(100,116,139,.2)">${ec(d.callDesc,'callDesc',d)}</td>
+      <!-- LEAD STAGE (2) -->
+      <td class="tm" style="border-left:2px solid rgba(124,58,237,.2)">${ec(d.leadStage,'leadStage',d)}</td>
+      <td class="tm">${ec(d.correctStage,'correctStage',d)}</td>
+      <!-- OUTCOME (3) -->
+      <td class="tm" style="border-left:2px solid rgba(225,29,72,.2)">${ec(d.qualifiedMark,'qualifiedMark',d)}</td>
+      <td class="tm">${ec(d.outcomeRecorded,'outcomeRecorded',d)}</td>
+      <td class="tm">${ec(d.outcome,'outcome',d)}</td>
+      <!-- DEAL (3) -->
+      <td class="tm" style="border-left:2px solid rgba(220,38,38,.2)">${ec(d.deal,'deal',d)}</td>
+      <td class="tm">${ec(d.timeline,'timeline',d)}</td><td class="tm">${ec(d.pipeline,'pipeline',d)}</td>
+      <!-- TASK (3) -->
       <td class="tm" style="border-left:2px solid rgba(99,102,241,.2)">${ec(d.taskCreated,'taskCreated',d)}</td>
       <td class="tm">${ec(d.taskDone,'taskDone',d)}</td><td class="tm">${ec(d.taskType,'taskType',d)}</td>
+      <!-- FOLLOW UP (1) -->
+      <td class="tm" style="border-left:2px solid rgba(8,145,178,.2)">${ec(d.timelyContact,'timelyContact',d)}</td>
       <td class="tm" style="color:${d.total>15?'var(--red)':d.total>5?'var(--amb)':'var(--grn)'};font-weight:700;font-size:14px">${d.total}</td>
       <td><div class="pc"><span style="color:${pc};font-weight:700;font-family:'DM Mono',monospace;font-size:13px">${d.pct.toFixed(1)}%</span><div class="pb2"><div class="pbf" style="width:${Math.min(d.pct,100)}%;background:${pc}"></div></div></div></td>
       <td class="tm">${d.qualPct!=null ? `<span style="font-weight:800;font-family:'DM Mono',monospace;font-size:13px;color:${d.qualPct>=90?'#059669':d.qualPct>=80?'#d97706':'#dc2626'}">${d.qualPct.toFixed(1)}%</span><br><span style="font-size:9px;color:var(--mu)">${d.caseQualified||0} audited</span>` : '<span style="color:#94a3b8;font-size:11px">—</span>'}</td>
@@ -2649,24 +3091,26 @@ function hofUpdateCharts() {
   // Each category: [errorFieldKeys, auditsPtsPerAudit]
   // Points earned = audits - (errors * penalty). % = earned/audits * 100
   const CAT_DEF = [
-    { label:'Outcome',    fields:['outcome'],                                                     auditsPts:10,
-      detail:['Outcome Recorded'] },
-    { label:'Call',       fields:['firstContact','firstCall','callLogged','callDesc'],             auditsPts:15,
-      detail:['1st Contact','1st Call','Call Logged','Call Desc'] },
-    { label:'Lead Stage', fields:['leadStage','correctStage','qualifiedMark'],                   auditsPts:15,
-      detail:['Lead Stage Upd','Correct Stage','Qualified Mark'] },
-    { label:'Deal',       fields:['deal','pipeline','timeline','properties'],                    auditsPts:30,
-      detail:['Deal Created','Pipeline','Timeline','Properties'] },
-    { label:'Email',      fields:['emailSent','emailHub','profTone','signature'],                auditsPts:12,
-      detail:['Email Sent','Email via Hub','Prof Tone','Signature'] },
-    { label:'WhatsApp',   fields:['waUsed','waLogged','waNote'],                                 auditsPts:12,
+    { label:'Call',       fields:['callLogged','callDesc','outcome'],                              auditsPts:12,
+      detail:['Call Error','Call Desc','Correct Lead'] },
+    { label:'WhatsApp',   fields:['waUsed','waLogged','waNote'],                                  auditsPts:12,
       detail:['WA Used','WA Logged','WA Note'] },
-    { label:'Task',       fields:['taskCreated','taskDone','taskType'],                          auditsPts:6,
+    { label:'Email',      fields:['emailSent','profTone','signature'],                            auditsPts:9,
+      detail:['Email Sent','Prof Tone','Company Sig'] },
+    { label:'Lead Stage', fields:['leadStage','correctStage'],                                    auditsPts:10,
+      detail:['All Required','Stage Updated'] },
+    { label:'Outcome',    fields:['qualifiedMark','outcomeRecorded'],                             auditsPts:8,
+      detail:['Qualified Stage','Outcome Rec.'] },
+    { label:'Deal',       fields:['deal','timeline','pipeline'],                                  auditsPts:24,
+      detail:['Deal Created','Timeline Act.','Pipeline ✓'] },
+    { label:'Task',       fields:['taskCreated','taskDone','taskType'],                           auditsPts:9,
       detail:['Task Created','Task Done','Task Type'] },
+    { label:'Follow Up',  fields:['timelyContact'],                                               auditsPts:4,
+      detail:['Timely Contact'] },
   ];
 
   const totalAudits = HOF_filtered.reduce((s,d)=>s+d.audits,0) || 1;
-  const wFields = ['catErr_outcome','catErr_call','catErr_leadStage','catErr_deal','catErr_email','catErr_whatsapp','catErr_task'];
+  const wFields = ['catErr_call','catErr_whatsapp','catErr_email','catErr_leadStage','catErr_outcome','catErr_deal','catErr_task','catErr_followUp'];
 
   const radarVals = CAT_DEF.map((cat,i) => {
     const catErrField = wFields[i];
@@ -2698,13 +3142,14 @@ function hofUpdateCharts() {
   const totalAuds   = HOF_filtered.reduce((s,d)=>s+d.audits,0) || 1;
   const catMaxPts   = CAT_DEF.map(() => totalAuds); // max = total audits (each audit can fail once)
   const catPtsLost  = [
-    HOF_filtered.reduce((s,d)=>s+(d.catErr_outcome||0),0),
     HOF_filtered.reduce((s,d)=>s+(d.catErr_call||0),0),
-    HOF_filtered.reduce((s,d)=>s+(d.catErr_leadStage||0),0),
-    HOF_filtered.reduce((s,d)=>s+(d.catErr_deal||0),0),
-    HOF_filtered.reduce((s,d)=>s+(d.catErr_email||0),0),
     HOF_filtered.reduce((s,d)=>s+(d.catErr_whatsapp||0),0),
+    HOF_filtered.reduce((s,d)=>s+(d.catErr_email||0),0),
+    HOF_filtered.reduce((s,d)=>s+(d.catErr_leadStage||0),0),
+    HOF_filtered.reduce((s,d)=>s+(d.catErr_outcome||0),0),
+    HOF_filtered.reduce((s,d)=>s+(d.catErr_deal||0),0),
     HOF_filtered.reduce((s,d)=>s+(d.catErr_task||0),0),
+    HOF_filtered.reduce((s,d)=>s+(d.catErr_followUp||0),0),
   ];
   const catPctLost = catPtsLost.map((v,i) => {
     return totalAuds > 0 ? Math.round((v/totalAuds)*100) : 0;
@@ -2744,20 +3189,22 @@ function showAgentRadar(name) {
   if (!d) return;
 
   const CAT_DEF = [
-    { label:'Outcome',    fields:['outcome'],                                                     auditsPts:10,
-      detail:['Outcome Recorded'],                                                color:'#e11d48' },
-    { label:'Call',       fields:['firstContact','firstCall','callLogged','callDesc'],             auditsPts:15,
-      detail:['1st Contact','1st Call','Call Logged','Call Desc'],        color:'#2563eb' },
-    { label:'Lead Stage', fields:['leadStage','correctStage','qualifiedMark'],                   auditsPts:15,
-      detail:['Lead Stage Upd','Correct Stage','Qualified Mark'],                   color:'#7c3aed' },
-    { label:'Deal',       fields:['deal','pipeline','timeline','properties'],                    auditsPts:30,
-      detail:['Deal Created','Pipeline','Timeline','Properties'],                   color:'#dc2626' },
-    { label:'Email',      fields:['emailSent','emailHub','profTone','signature'],                auditsPts:12,
-      detail:['Email Sent','Email via Hub','Prof Tone','Signature'],                color:'#d97706' },
-    { label:'WhatsApp',   fields:['waUsed','waLogged','waNote'],                                 auditsPts:12,
-      detail:['WA Used','WA Logged','WA Note'],                                    color:'#059669' },
-    { label:'Task',       fields:['taskCreated','taskDone','taskType'],                          auditsPts:6,
-      detail:['Task Created','Task Done','Task Type'],                              color:'#6366f1' },
+    { label:'Call',       fields:['callLogged','callDesc','outcome'],                              auditsPts:12,
+      detail:['Call Error','Call Desc','Correct Lead'],                         color:'#2563eb' },
+    { label:'WhatsApp',   fields:['waUsed','waLogged','waNote'],                                  auditsPts:12,
+      detail:['WA Used','WA Logged','WA Note'],                                 color:'#059669' },
+    { label:'Email',      fields:['emailSent','profTone','signature'],                            auditsPts:9,
+      detail:['Email Sent','Prof Tone','Company Sig'],                          color:'#d97706' },
+    { label:'Lead Stage', fields:['leadStage','correctStage'],                                    auditsPts:10,
+      detail:['All Required','Stage Updated'],                                  color:'#7c3aed' },
+    { label:'Outcome',    fields:['qualifiedMark','outcomeRecorded'],                             auditsPts:8,
+      detail:['Qualified Stage','Outcome Rec.'],                                color:'#e11d48' },
+    { label:'Deal',       fields:['deal','timeline','pipeline'],                                  auditsPts:24,
+      detail:['Deal Created','Timeline Act.','Pipeline ✓'],                    color:'#dc2626' },
+    { label:'Task',       fields:['taskCreated','taskDone','taskType'],                           auditsPts:9,
+      detail:['Task Created','Task Done','Task Type'],                          color:'#6366f1' },
+    { label:'Follow Up',  fields:['timelyContact'],                                               auditsPts:4,
+      detail:['Timely Contact'],                                                color:'#0891b2' },
   ];
 
   const audits = d.audits || 1;
@@ -2837,30 +3284,36 @@ function renderTrainingPanel() {
   const panel = document.getElementById('trainingPanel');
   if (!panel || !HOF_filtered.length) return;
 
-  // All 22 attributes with name, field, weight, category color
+  // All current attributes with name, field, weight, category color
   const ATTRS = [
-    {name:'1st Contact',    field:'firstContact', pts:4,  cat:'Call',       col:'#2563eb'},
-    {name:'1st Call Made',  field:'firstCall',    pts:4,  cat:'Call',       col:'#2563eb'},
-    {name:'Call Logged',    field:'callLogged',   pts:4,  cat:'Call',       col:'#2563eb'},
-    {name:'Outcome',        field:'outcome',      pts:4,  cat:'Call',       col:'#2563eb'},
-    {name:'Call Desc',      field:'callDesc',     pts:4,  cat:'Call',       col:'#2563eb'},
-    {name:'Lead Stage Upd', field:'leadStage',    pts:5,  cat:'Lead Stage', col:'#7c3aed'},
-    {name:'Correct Stage',  field:'correctStage', pts:5,  cat:'Lead Stage', col:'#7c3aed'},
-    {name:'Qualified Mark', field:'qualifiedMark',pts:5,  cat:'Lead Stage', col:'#7c3aed'},
-    {name:'Deal Created',   field:'deal',         pts:8,  cat:'Deal',       col:'#dc2626'},
-    {name:'Pipeline',       field:'pipeline',     pts:8,  cat:'Deal',       col:'#dc2626'},
-    {name:'Timeline',       field:'timeline',     pts:8,  cat:'Deal',       col:'#dc2626'},
-    {name:'Properties',     field:'properties',   pts:8,  cat:'Deal',       col:'#dc2626'},
-    {name:'Email Sent',     field:'emailSent',    pts:3,  cat:'Email',      col:'#d97706'},
-    {name:'Email via Hub',  field:'emailHub',     pts:3,  cat:'Email',      col:'#d97706'},
-    {name:'Prof Tone',      field:'profTone',     pts:3,  cat:'Email',      col:'#d97706'},
-    {name:'Signature',      field:'signature',    pts:3,  cat:'Email',      col:'#d97706'},
-    {name:'WA Used',        field:'waUsed',       pts:4,  cat:'WhatsApp',   col:'#059669'},
-    {name:'WA Logged',      field:'waLogged',     pts:4,  cat:'WhatsApp',   col:'#059669'},
-    {name:'WA Note',        field:'waNote',       pts:4,  cat:'WhatsApp',   col:'#059669'},
-    {name:'Task Created',   field:'taskCreated',  pts:3,  cat:'Task',       col:'#6366f1'},
-    {name:'Task Done',      field:'taskDone',     pts:3,  cat:'Task',       col:'#6366f1'},
-    {name:'Task Type',      field:'taskType',     pts:3,  cat:'Task',       col:'#6366f1'},
+    // CALL
+    {name:'Call Error',       field:'callLogged',      pts:4,  cat:'Call',       col:'#2563eb'},
+    {name:'Call Desc',        field:'callDesc',        pts:4,  cat:'Call',       col:'#2563eb'},
+    {name:'Correct Lead',     field:'outcome',         pts:4,  cat:'Call',       col:'#2563eb'},
+    // WHATSAPP
+    {name:'WA Used',          field:'waUsed',          pts:4,  cat:'WhatsApp',   col:'#059669'},
+    {name:'WA Logged',        field:'waLogged',        pts:4,  cat:'WhatsApp',   col:'#059669'},
+    {name:'WA Note',          field:'waNote',          pts:4,  cat:'WhatsApp',   col:'#059669'},
+    // EMAIL
+    {name:'Email Sent',       field:'emailSent',       pts:3,  cat:'Email',      col:'#d97706'},
+    {name:'Prof Tone',        field:'profTone',        pts:3,  cat:'Email',      col:'#d97706'},
+    {name:'Company Sig',      field:'signature',       pts:3,  cat:'Email',      col:'#d97706'},
+    // LEAD STAGE
+    {name:'All Required',     field:'leadStage',       pts:5,  cat:'Lead Stage', col:'#7c3aed'},
+    {name:'Stage Updated',    field:'correctStage',    pts:5,  cat:'Lead Stage', col:'#7c3aed'},
+    // OUTCOME
+    {name:'Qualified Stage',  field:'qualifiedMark',   pts:4,  cat:'Outcome',    col:'#e11d48'},
+    {name:'Outcome Rec.',     field:'outcomeRecorded', pts:4,  cat:'Outcome',    col:'#e11d48'},
+    // DEAL
+    {name:'Deal Created',     field:'deal',            pts:8,  cat:'Deal',       col:'#dc2626'},
+    {name:'Timeline Act.',    field:'timeline',        pts:8,  cat:'Deal',       col:'#dc2626'},
+    {name:'Pipeline ✓',       field:'pipeline',        pts:8,  cat:'Deal',       col:'#dc2626'},
+    // TASK
+    {name:'Task Created',     field:'taskCreated',     pts:3,  cat:'Task',       col:'#6366f1'},
+    {name:'Task Done',        field:'taskDone',        pts:3,  cat:'Task',       col:'#6366f1'},
+    {name:'Task Type',        field:'taskType',        pts:3,  cat:'Task',       col:'#6366f1'},
+    // FOLLOW UP (new)
+    {name:'Timely Contact',   field:'timelyContact',   pts:4,  cat:'Follow Up',  col:'#0891b2'},
   ];
 
   // Sort agents by total pts lost descending
@@ -2979,13 +3432,14 @@ function renderPersonalCard(d) {
 
   // Category scores
   const CATS = [
-    {name:'📋 Outcome',   catErr:d.catErr_outcome||0,   col:'#e11d48', errors:[d.outcome],                                      attrs:['Outcome Recorded']},
-    {name:'📞 Call',      catErr:d.catErr_call||0,      col:'#2563eb', errors:[d.firstContact,d.firstCall,d.callLogged,d.callDesc], attrs:['1st Contact','1st Call','Call Logged','Call Desc']},
-    {name:'🎯 Lead Stage',catErr:d.catErr_leadStage||0, col:'#7c3aed', errors:[d.leadStage,d.correctStage,d.qualifiedMark],          attrs:['Lead Stage','Correct Stage','Qualified Mark']},
-    {name:'💼 Deal',      catErr:d.catErr_deal||0,      col:'#dc2626', errors:[d.deal,d.pipeline,d.timeline,d.properties],           attrs:['Deal Created','Pipeline','Timeline','Properties']},
-    {name:'📧 Email',     catErr:d.catErr_email||0,     col:'#d97706', errors:[d.emailSent,d.emailHub,d.profTone,d.signature],       attrs:['Email Sent','Email via Hub','Prof Tone','Signature']},
-    {name:'💬 WhatsApp',  catErr:d.catErr_whatsapp||0,  col:'#059669', errors:[d.waUsed,d.waLogged,d.waNote],                        attrs:['WA Used','WA Logged','WA Note']},
-    {name:'✅ Task',      catErr:d.catErr_task||0,       col:'#6366f1', errors:[d.taskCreated,d.taskDone,d.taskType],                 attrs:['Task Created','Task Done','Task Type']},
+    {name:'📞 Call',       catErr:d.catErr_call||0,      col:'#2563eb', errors:[d.callLogged,d.callDesc,d.outcome],                   attrs:['Call Error','Call Desc','Correct Lead']},
+    {name:'💬 WhatsApp',   catErr:d.catErr_whatsapp||0,  col:'#059669', errors:[d.waUsed,d.waLogged,d.waNote],                        attrs:['WA Used','WA Logged','WA Note']},
+    {name:'📧 Email',      catErr:d.catErr_email||0,     col:'#d97706', errors:[d.emailSent,d.profTone,d.signature],                  attrs:['Email Sent','Prof Tone','Company Sig']},
+    {name:'🎯 Lead Stage', catErr:d.catErr_leadStage||0, col:'#7c3aed', errors:[d.leadStage,d.correctStage],                          attrs:['All Required','Stage Updated']},
+    {name:'📋 Outcome',    catErr:d.catErr_outcome||0,   col:'#e11d48', errors:[d.qualifiedMark,d.outcomeRecorded],                   attrs:['Qualified Stage','Outcome Rec.']},
+    {name:'💼 Deal',       catErr:d.catErr_deal||0,      col:'#dc2626', errors:[d.deal,d.timeline,d.pipeline],                       attrs:['Deal Created','Timeline Act.','Pipeline ✓']},
+    {name:'✅ Task',       catErr:d.catErr_task||0,      col:'#6366f1', errors:[d.taskCreated,d.taskDone,d.taskType],                 attrs:['Task Created','Task Done','Task Type']},
+    {name:'⏱ Follow Up',  catErr:d.catErr_followUp||0,  col:'#0891b2', errors:[d.timelyContact],                                    attrs:['Timely Contact']},
   ];
 
   const catScores = CATS.map(c => ({
@@ -3049,28 +3503,26 @@ function renderPersonalCard(d) {
 
   // Top 3 coaching items — highest impact errors
   const ATTRS = [
-    {name:'1st Contact',    field:'firstContact', pts:4,  cat:'Call'},
-    {name:'1st Call Made',  field:'firstCall',    pts:4,  cat:'Call'},
-    {name:'Call Logged',    field:'callLogged',   pts:4,  cat:'Call'},
-    {name:'Outcome',        field:'outcome',      pts:4,  cat:'Call'},
-    {name:'Call Desc',      field:'callDesc',     pts:4,  cat:'Call'},
-    {name:'Lead Stage Upd', field:'leadStage',    pts:5,  cat:'Lead Stage'},
-    {name:'Correct Stage',  field:'correctStage', pts:5,  cat:'Lead Stage'},
-    {name:'Qualified Mark', field:'qualifiedMark',pts:5,  cat:'Lead Stage'},
-    {name:'Deal Created',   field:'deal',         pts:8,  cat:'Deal'},
-    {name:'Pipeline',       field:'pipeline',     pts:8,  cat:'Deal'},
-    {name:'Timeline',       field:'timeline',     pts:8,  cat:'Deal'},
-    {name:'Properties',     field:'properties',   pts:8,  cat:'Deal'},
-    {name:'Email Sent',     field:'emailSent',    pts:3,  cat:'Email'},
-    {name:'Email via Hub',  field:'emailHub',     pts:3,  cat:'Email'},
-    {name:'Prof Tone',      field:'profTone',     pts:3,  cat:'Email'},
-    {name:'Signature',      field:'signature',    pts:3,  cat:'Email'},
-    {name:'WA Used',        field:'waUsed',       pts:4,  cat:'WhatsApp'},
-    {name:'WA Logged',      field:'waLogged',     pts:4,  cat:'WhatsApp'},
-    {name:'WA Note',        field:'waNote',       pts:4,  cat:'WhatsApp'},
-    {name:'Task Created',   field:'taskCreated',  pts:3,  cat:'Task'},
-    {name:'Task Done',      field:'taskDone',     pts:3,  cat:'Task'},
-    {name:'Task Type',      field:'taskType',     pts:3,  cat:'Task'},
+    {name:'Call Error',      field:'callLogged',      pts:4, cat:'Call'},
+    {name:'Call Desc',       field:'callDesc',        pts:4, cat:'Call'},
+    {name:'Correct Lead',    field:'outcome',         pts:4, cat:'Call'},
+    {name:'WA Used',         field:'waUsed',          pts:4, cat:'WhatsApp'},
+    {name:'WA Logged',       field:'waLogged',        pts:4, cat:'WhatsApp'},
+    {name:'WA Note',         field:'waNote',          pts:4, cat:'WhatsApp'},
+    {name:'Email Sent',      field:'emailSent',       pts:3, cat:'Email'},
+    {name:'Prof Tone',       field:'profTone',        pts:3, cat:'Email'},
+    {name:'Company Sig',     field:'signature',       pts:3, cat:'Email'},
+    {name:'All Required',    field:'leadStage',       pts:5, cat:'Lead Stage'},
+    {name:'Stage Updated',   field:'correctStage',    pts:5, cat:'Lead Stage'},
+    {name:'Qualified Stage', field:'qualifiedMark',   pts:4, cat:'Outcome'},
+    {name:'Outcome Rec.',    field:'outcomeRecorded', pts:4, cat:'Outcome'},
+    {name:'Deal Created',    field:'deal',            pts:8, cat:'Deal'},
+    {name:'Timeline Act.',   field:'timeline',        pts:8, cat:'Deal'},
+    {name:'Pipeline ✓',      field:'pipeline',        pts:8, cat:'Deal'},
+    {name:'Task Created',    field:'taskCreated',     pts:3, cat:'Task'},
+    {name:'Task Done',       field:'taskDone',        pts:3, cat:'Task'},
+    {name:'Task Type',       field:'taskType',        pts:3, cat:'Task'},
+    {name:'Timely Contact',  field:'timelyContact',   pts:4, cat:'Follow Up'},
   ];
 
   const ranked = ATTRS
@@ -3273,7 +3725,7 @@ function renderLeaderboards() {
       : '';
 
     // Find worst category
-    const cats = {Outcome:d.catErr_outcome||0,Call:d.catErr_call||0,Lead:d.catErr_leadStage||0,Deal:d.catErr_deal||0,Email:d.catErr_email||0,WA:d.catErr_whatsapp||0,Task:d.catErr_task||0};
+    const cats = {Call:d.catErr_call||0,WhatsApp:d.catErr_whatsapp||0,Email:d.catErr_email||0,Lead:d.catErr_leadStage||0,Outcome:d.catErr_outcome||0,Deal:d.catErr_deal||0,Task:d.catErr_task||0,'Follow Up':d.catErr_followUp||0};
     const worst = Object.entries(cats).sort((a,b)=>b[1]-a[1])[0];
 
     // Flag if overall looks good but qualified is weak (hidden risk)
@@ -3511,18 +3963,22 @@ function catPct(catErr, audits) {
 
 // Category → sub-field mapping for collecting case links
 var CAT_SUBFIELDS = {
-  'outcome':    ['outcome'],
-  'call':       ['firstContact','firstCall','callLogged','callDesc'],
-  'leadStage':  ['leadStage','correctStage','qualifiedMark'],
-  'deal':       ['deal','pipeline','timeline','properties'],
-  'email':      ['emailSent','emailHub','profTone','signature'],
+  'call':       ['callLogged','callDesc','outcome'],
   'whatsapp':   ['waUsed','waLogged','waNote'],
-  'task':       ['taskCreated','taskDone','taskType']
+  'email':      ['emailSent','profTone','signature'],
+  'leadStage':  ['leadStage','correctStage'],
+  'outcome':    ['qualifiedMark','outcomeRecorded'],
+  'deal':       ['deal','timeline','pipeline'],
+  'task':       ['taskCreated','taskDone','taskType'],
+  'followUp':   ['timelyContact'],
+  // Legacy compat
+  'firstContact':['firstContact'],'firstCall':['firstCall'],'properties':['properties'],'emailHub':['emailHub']
 };
 
 var CAT_FRIENDLY = {
-  'outcome':'Outcome','call':'Call','leadStage':'Lead Stage',
-  'deal':'Deal','email':'Email','whatsapp':'WhatsApp','task':'Task'
+  'call':'Call','whatsapp':'WhatsApp','email':'Email',
+  'leadStage':'Lead Stage','outcome':'Outcome',
+  'deal':'Deal','task':'Task','followUp':'Follow Up'
 };
 
 // Clickable category error cell — collects links from all sub-fields, opens modal on click
@@ -3645,46 +4101,46 @@ function renderWeightTable() {
   const MAX = { outcome:10, call:15, lead:15, deal:30, email:12, wa:12, task:6 };
 
   // Sort by total points lost descending
-  const sorted = HOF_filtered.slice().sort((a,b) => (b.catErr_outcome+b.catErr_call+b.catErr_leadStage+b.catErr_deal+b.catErr_email+b.catErr_whatsapp+b.catErr_task) - (a.catErr_outcome+a.catErr_call+a.catErr_leadStage+a.catErr_deal+a.catErr_email+a.catErr_whatsapp+a.catErr_task));
+  const sorted = HOF_filtered.slice().sort((a,b) =>
+    ((b.catErr_call||0)+(b.catErr_whatsapp||0)+(b.catErr_email||0)+(b.catErr_leadStage||0)+(b.catErr_outcome||0)+(b.catErr_deal||0)+(b.catErr_task||0)+(b.catErr_followUp||0)) -
+    ((a.catErr_call||0)+(a.catErr_whatsapp||0)+(a.catErr_email||0)+(a.catErr_leadStage||0)+(a.catErr_outcome||0)+(a.catErr_deal||0)+(a.catErr_task||0)+(a.catErr_followUp||0))
+  );
 
   wtb.innerHTML = sorted.map(d => {
-    const total = (d.catErr_outcome||0)+(d.catErr_call||0)+(d.catErr_leadStage||0)+(d.catErr_deal||0)+(d.catErr_email||0)+(d.catErr_whatsapp||0)+(d.catErr_task||0);
+    const total = (d.catErr_call||0)+(d.catErr_whatsapp||0)+(d.catErr_email||0)+(d.catErr_leadStage||0)+(d.catErr_outcome||0)+(d.catErr_deal||0)+(d.catErr_task||0)+(d.catErr_followUp||0);
     const pc = d.pct>=90?'#059669':d.pct>=80?'#d97706':'#dc2626';
     return `<tr>
       <td style="font-weight:600">${d.name}</td>
       <td class="tm">${d.audits}</td>
-      <td class="tm">${catPctClickable(d.catErr_outcome||0,d.audits,'outcome',d)}</td>
       <td class="tm">${catPctClickable(d.catErr_call||0,d.audits,'call',d)}</td>
-      <td class="tm">${catPctClickable(d.catErr_leadStage||0,d.audits,'leadStage',d)}</td>
-      <td class="tm">${catPctClickable(d.catErr_deal||0,d.audits,'deal',d)}</td>
-      <td class="tm">${catPctClickable(d.catErr_email||0,d.audits,'email',d)}</td>
       <td class="tm">${catPctClickable(d.catErr_whatsapp||0,d.audits,'whatsapp',d)}</td>
+      <td class="tm">${catPctClickable(d.catErr_email||0,d.audits,'email',d)}</td>
+      <td class="tm">${catPctClickable(d.catErr_leadStage||0,d.audits,'leadStage',d)}</td>
+      <td class="tm">${catPctClickable(d.catErr_outcome||0,d.audits,'outcome',d)}</td>
+      <td class="tm">${catPctClickable(d.catErr_deal||0,d.audits,'deal',d)}</td>
       <td class="tm">${catPctClickable(d.catErr_task||0,d.audits,'task',d)}</td>
+      <td class="tm">${catPctClickable(d.catErr_followUp||0,d.audits,'followUp',d)}</td>
       <td class="tm" style="font-weight:700;color:${d.total===0?'#059669':d.total>20?'#dc2626':'#d97706'}">${d.total}</td>
       <td class="tm"><span style="color:${pc};font-weight:800;font-family:'DM Mono',monospace;font-size:13px">${d.pct.toFixed(1)}%</span></td>
     </tr>`;
   }).join('');
 
   // Team totals row
-  const tt = sorted.reduce((s,d)=>({
-    wCall:0, wLeadStage:0, wDeal:0, wEmail:0, wWhatsApp:0, wTask:0
-  }), {wCall:0,wLeadStage:0,wDeal:0,wEmail:0,wWhatsApp:0,wTask:0});
   const ttotal = HOF_filtered.reduce((s,d)=>s+d.total,0);
   const tavg = HOF_filtered.length ? HOF_filtered.reduce((s,d)=>s+d.pct,0)/HOF_filtered.length : 0;
   const tpc = tavg>=90?'#059669':tavg>=80?'#d97706':'#dc2626';
   const tAud = HOF_filtered.reduce((s,d)=>s+d.audits,0)||1;
-  const tAvgPct = HOF_filtered.length ? HOF_filtered.reduce((s,d)=>s+d.pct,0)/HOF_filtered.length : 0;
-  const tpc2 = tAvgPct>=90?'#059669':tAvgPct>=80?'#d97706':'#dc2626';
   wtb.innerHTML += `<tr style="background:var(--m2);font-weight:700;border-top:2px solid var(--m3)">
     <td>📊 TEAM TOTAL</td>
     <td class="tm">${tAud}</td>
-    <td class="tm" style="color:#e11d48">${HOF_filtered.reduce((s,d)=>s+(d.catErr_outcome||0),0)}</td>
     <td class="tm" style="color:#2563eb">${HOF_filtered.reduce((s,d)=>s+(d.catErr_call||0),0)}</td>
-    <td class="tm" style="color:#7c3aed">${HOF_filtered.reduce((s,d)=>s+(d.catErr_leadStage||0),0)}</td>
-    <td class="tm" style="color:#dc2626">${HOF_filtered.reduce((s,d)=>s+(d.catErr_deal||0),0)}</td>
-    <td class="tm" style="color:#d97706">${HOF_filtered.reduce((s,d)=>s+(d.catErr_email||0),0)}</td>
     <td class="tm" style="color:#059669">${HOF_filtered.reduce((s,d)=>s+(d.catErr_whatsapp||0),0)}</td>
+    <td class="tm" style="color:#d97706">${HOF_filtered.reduce((s,d)=>s+(d.catErr_email||0),0)}</td>
+    <td class="tm" style="color:#7c3aed">${HOF_filtered.reduce((s,d)=>s+(d.catErr_leadStage||0),0)}</td>
+    <td class="tm" style="color:#e11d48">${HOF_filtered.reduce((s,d)=>s+(d.catErr_outcome||0),0)}</td>
+    <td class="tm" style="color:#dc2626">${HOF_filtered.reduce((s,d)=>s+(d.catErr_deal||0),0)}</td>
     <td class="tm" style="color:#6366f1">${HOF_filtered.reduce((s,d)=>s+(d.catErr_task||0),0)}</td>
+    <td class="tm" style="color:#0891b2">${HOF_filtered.reduce((s,d)=>s+(d.catErr_followUp||0),0)}</td>
     <td class="tm">${ttotal}</td>
     <td class="tm"><span style="color:${tpc};font-family:'DM Mono',monospace;font-weight:800">${tavg.toFixed(1)}%</span></td>
   </tr>`;
@@ -3700,33 +4156,39 @@ function exportTeamCSV() {
   if (!HOF_filtered.length) { showToast('No data to export'); return; }
 
   const headers = ['Consultant','Audits','Compliance %','Error Rate','Total Errors',
-    'Call Pts Lost','Lead Stage Pts Lost','Deal Pts Lost','Email Pts Lost','WA Pts Lost','Task Pts Lost',
+    'Call Pts Lost','WhatsApp Pts Lost','Email Pts Lost','Lead Stage Pts Lost','Outcome Pts Lost','Deal Pts Lost','Task Pts Lost','Follow Up Pts Lost',
     'Total Pts Lost','% of Max Lost',
     'SOP: Qualified No Deal','SOP: Deal Wrong Stage','SOP: Qual Wrong Stage',
     'Case: Qualified','Case: No Answer','Case: Callback','Case: Cannot Dial',
-    '1st Contact Errors','1st Call Errors','Call Logged Errors','Outcome Errors','Call Desc Errors',
-    'Lead Stage Errors','Correct Stage Errors','Qualified Mark Errors',
-    'Deal Created Errors','Pipeline Errors','Timeline Errors','Properties Errors',
-    'Email Sent Errors','Email Hub Errors','Prof Tone Errors','Signature Errors',
+    // Current error columns
+    'Call Error','Call Desc Errors','Correct Lead Errors',
     'WA Used Errors','WA Logged Errors','WA Note Errors',
-    'Task Created Errors','Task Done Errors','Task Type Errors'];
+    'Email Sent Errors','Prof Tone Errors','Company Sig Errors',
+    'All Required Errors','Stage Updated Errors',
+    'Qualified Stage Errors','Outcome Recorded Errors',
+    'Deal Created Errors','Timeline Errors','Pipeline Errors',
+    'Task Created Errors','Task Done Errors','Task Type Errors',
+    'Timely Contact Errors'];
 
   const rows = HOF_filtered.map(d => {
-    const totalCatErrs = (d.catErr_outcome||0)+(d.catErr_call||0)+(d.catErr_leadStage||0)+(d.catErr_deal||0)+(d.catErr_email||0)+(d.catErr_whatsapp||0)+(d.catErr_task||0);
+    const totalCatErrs = (d.catErr_call||0)+(d.catErr_whatsapp||0)+(d.catErr_email||0)+(d.catErr_leadStage||0)+(d.catErr_outcome||0)+(d.catErr_deal||0)+(d.catErr_task||0)+(d.catErr_followUp||0);
     return [
       d.name, d.audits, d.pct.toFixed(1)+'%',
       (d.audits>0?(d.total/d.audits).toFixed(2):0),
       d.total,
-      d.catErr_outcome||0, d.catErr_call||0, d.catErr_leadStage||0, d.catErr_deal||0, d.catErr_email||0, d.catErr_whatsapp||0, d.catErr_task||0,
+      d.catErr_call||0, d.catErr_whatsapp||0, d.catErr_email||0, d.catErr_leadStage||0, d.catErr_outcome||0, d.catErr_deal||0, d.catErr_task||0, d.catErr_followUp||0,
       totalCatErrs, d.audits>0?((totalCatErrs/d.audits)*100).toFixed(1)+'%':'0%',
       d.mismatchQualNoDeal||0, d.mismatchDealWrongStage||0, d.mismatchQualWrongStage||0,
       d.caseQualified||0, d.caseNoAnswer||0, d.caseCallback||0, d.caseCannotDial||0,
-      d.firstContact||0, d.firstCall||0, d.callLogged||0, d.outcome||0, d.callDesc||0,
-      d.leadStage||0, d.correctStage||0, d.qualifiedMark||0,
-      d.deal||0, d.pipeline||0, d.timeline||0, d.properties||0,
-      d.emailSent||0, d.emailHub||0, d.profTone||0, d.signature||0,
+      // Current fields
+      d.callLogged||0, d.callDesc||0, d.outcome||0,
       d.waUsed||0, d.waLogged||0, d.waNote||0,
-      d.taskCreated||0, d.taskDone||0, d.taskType||0
+      d.emailSent||0, d.profTone||0, d.signature||0,
+      d.leadStage||0, d.correctStage||0,
+      d.qualifiedMark||0, d.outcomeRecorded||0,
+      d.deal||0, d.timeline||0, d.pipeline||0,
+      d.taskCreated||0, d.taskDone||0, d.taskType||0,
+      d.timelyContact||0
     ];
   });
 
@@ -3803,28 +4265,26 @@ function generateConsultantPDF(d) {
   doc.text('🎯 Top 3 Things to Fix', margin, y); y += 7;
 
   const ATTRS = [
-    {name:'1st Contact',field:'firstContact',pts:4,cat:'Call'},
-    {name:'1st Call Made',field:'firstCall',pts:4,cat:'Call'},
-    {name:'Call Logged',field:'callLogged',pts:4,cat:'Call'},
-    {name:'Outcome',field:'outcome',pts:4,cat:'Call'},
-    {name:'Call Desc',field:'callDesc',pts:4,cat:'Call'},
-    {name:'Lead Stage Upd',field:'leadStage',pts:5,cat:'Lead Stage'},
-    {name:'Correct Stage',field:'correctStage',pts:5,cat:'Lead Stage'},
-    {name:'Qualified Mark',field:'qualifiedMark',pts:5,cat:'Lead Stage'},
-    {name:'Deal Created',field:'deal',pts:8,cat:'Deal'},
-    {name:'Pipeline',field:'pipeline',pts:8,cat:'Deal'},
-    {name:'Timeline',field:'timeline',pts:8,cat:'Deal'},
-    {name:'Properties',field:'properties',pts:8,cat:'Deal'},
-    {name:'Email Sent',field:'emailSent',pts:3,cat:'Email'},
-    {name:'Email via Hub',field:'emailHub',pts:3,cat:'Email'},
-    {name:'Prof Tone',field:'profTone',pts:3,cat:'Email'},
-    {name:'Signature',field:'signature',pts:3,cat:'Email'},
-    {name:'WA Used',field:'waUsed',pts:4,cat:'WhatsApp'},
-    {name:'WA Logged',field:'waLogged',pts:4,cat:'WhatsApp'},
-    {name:'WA Note',field:'waNote',pts:4,cat:'WhatsApp'},
-    {name:'Task Created',field:'taskCreated',pts:3,cat:'Task'},
-    {name:'Task Done',field:'taskDone',pts:3,cat:'Task'},
-    {name:'Task Type',field:'taskType',pts:3,cat:'Task'},
+    {name:'Call Error',      field:'callLogged',      pts:4, cat:'Call'},
+    {name:'Call Desc',       field:'callDesc',        pts:4, cat:'Call'},
+    {name:'Correct Lead',    field:'outcome',         pts:4, cat:'Call'},
+    {name:'WA Used',         field:'waUsed',          pts:4, cat:'WhatsApp'},
+    {name:'WA Logged',       field:'waLogged',        pts:4, cat:'WhatsApp'},
+    {name:'WA Note',         field:'waNote',          pts:4, cat:'WhatsApp'},
+    {name:'Email Sent',      field:'emailSent',       pts:3, cat:'Email'},
+    {name:'Prof Tone',       field:'profTone',        pts:3, cat:'Email'},
+    {name:'Company Sig',     field:'signature',       pts:3, cat:'Email'},
+    {name:'All Required',    field:'leadStage',       pts:5, cat:'Lead Stage'},
+    {name:'Stage Updated',   field:'correctStage',    pts:5, cat:'Lead Stage'},
+    {name:'Qualified Stage', field:'qualifiedMark',   pts:4, cat:'Outcome'},
+    {name:'Outcome Rec.',    field:'outcomeRecorded', pts:4, cat:'Outcome'},
+    {name:'Deal Created',    field:'deal',            pts:8, cat:'Deal'},
+    {name:'Timeline Act.',   field:'timeline',        pts:8, cat:'Deal'},
+    {name:'Pipeline ✓',      field:'pipeline',        pts:8, cat:'Deal'},
+    {name:'Task Created',    field:'taskCreated',     pts:3, cat:'Task'},
+    {name:'Task Done',       field:'taskDone',        pts:3, cat:'Task'},
+    {name:'Task Type',       field:'taskType',        pts:3, cat:'Task'},
+    {name:'Timely Contact',  field:'timelyContact',   pts:4, cat:'Follow Up'},
   ];
   const top3 = ATTRS.map(a=>({...a,count:d[a.field]||0,impact:(d[a.field]||0)*a.pts}))
     .filter(a=>a.count>0).sort((a,b)=>b.impact-a.impact).slice(0,3);
@@ -3855,13 +4315,14 @@ function generateConsultantPDF(d) {
   doc.text('📊 Performance by Category', margin, y); y += 5;
 
   const cats = [
-    {name:'Outcome',   lost:d.catErr_outcome||0,  poss:d.audits, errs:d.outcome||0},
-    {name:'Call',      lost:d.catErr_call||0,     poss:d.audits, errs:(d.firstContact||0)+(d.firstCall||0)+(d.callLogged||0)+(d.callDesc||0)},
-    {name:'Lead Stage',lost:d.catErr_leadStage||0, poss:d.audits, errs:(d.leadStage||0)+(d.correctStage||0)+(d.qualifiedMark||0)},
-    {name:'Deal',      lost:d.catErr_deal||0,     poss:d.audits, errs:(d.deal||0)+(d.pipeline||0)+(d.timeline||0)+(d.properties||0)},
-    {name:'Email',     lost:d.catErr_email||0,    poss:d.audits,    errs:(d.emailSent||0)+(d.emailHub||0)+(d.profTone||0)+(d.signature||0)},
-    {name:'WhatsApp',  lost:d.catErr_whatsapp||0, poss:d.audits, errs:(d.waUsed||0)+(d.waLogged||0)+(d.waNote||0)},
-    {name:'Task',      lost:d.catErr_task||0,     poss:d.audits,     errs:(d.taskCreated||0)+(d.taskDone||0)+(d.taskType||0)},
+    {name:'Call',       lost:d.catErr_call||0,      poss:d.audits, errs:(d.callLogged||0)+(d.callDesc||0)+(d.outcome||0)},
+    {name:'WhatsApp',   lost:d.catErr_whatsapp||0,  poss:d.audits, errs:(d.waUsed||0)+(d.waLogged||0)+(d.waNote||0)},
+    {name:'Email',      lost:d.catErr_email||0,     poss:d.audits, errs:(d.emailSent||0)+(d.profTone||0)+(d.signature||0)},
+    {name:'Lead Stage', lost:d.catErr_leadStage||0, poss:d.audits, errs:(d.leadStage||0)+(d.correctStage||0)},
+    {name:'Outcome',    lost:d.catErr_outcome||0,   poss:d.audits, errs:(d.qualifiedMark||0)+(d.outcomeRecorded||0)},
+    {name:'Deal',       lost:d.catErr_deal||0,      poss:d.audits, errs:(d.deal||0)+(d.timeline||0)+(d.pipeline||0)},
+    {name:'Task',       lost:d.catErr_task||0,      poss:d.audits, errs:(d.taskCreated||0)+(d.taskDone||0)+(d.taskType||0)},
+    {name:'Follow Up',  lost:d.catErr_followUp||0,  poss:d.audits, errs:(d.timelyContact||0)},
   ];
 
   doc.autoTable({
@@ -4787,13 +5248,18 @@ function cmSrch(tbId, val) {
 
 // FIELD → friendly name map
 var HOF_FIELD_NAMES = {
-  firstContact:'1st Contact',firstCall:'1st Call Made',callLogged:'Call Logged',
-  outcome:'Outcome',callDesc:'Call Description',leadStage:'Lead Stage Updated',
-  correctStage:'Correct Stage',qualifiedMark:'Qualified Mark',deal:'Deal Created',
-  pipeline:'Pipeline',timeline:'Timeline',properties:'Properties',
-  emailSent:'Email Sent',emailHub:'Email via HubSpot',profTone:'Professional Tone',
-  signature:'Signature',waUsed:'WhatsApp Used',waLogged:'WhatsApp Logged',
-  waNote:'WhatsApp Note',taskCreated:'Task Created',taskDone:'Task Done',taskType:'Task Type'
+  // Current fields
+  callLogged:'Call Error',callDesc:'Call Description',outcome:'Correct Lead',
+  waUsed:'WhatsApp Used',waLogged:'WhatsApp Logged',waNote:'WhatsApp Note',
+  emailSent:'Email Sent',profTone:'Professional Tone',signature:'Company Signature',
+  leadStage:'All Required',correctStage:'Stage Updated',
+  qualifiedMark:'Qualified Stage',outcomeRecorded:'Outcome Recorded',
+  deal:'Deal Created',timeline:'Timeline Action',pipeline:'Pipeline Correct',
+  taskCreated:'Task Created',taskDone:'Task Done',taskType:'Task Type Match',
+  timelyContact:'Timely Contact',
+  // Legacy compat
+  firstContact:'1st Contact',firstCall:'1st Call Made',
+  properties:'Properties',emailHub:'Email via HubSpot'
 };
 
 function showCaseLinkModal(fieldName, agentName, count, links, hasLinks) {
@@ -4960,45 +5426,52 @@ function aiAsk(question) {
 
 function buildDashboardContext(question) {
   if (!HOF_ALL || !HOF_ALL.length) return 'No dashboard data loaded yet.';
-  
-  var catNames = {
-    call:        'Call',
-    whatsapp:    'WhatsApp',
-    email:       'Email',
-    description: 'Description',
-    leadStage:   'Lead Stage',
-    outcome:     'Outcome',
-    deal:        'Deal',
-    pipeline:    'Pipeline',
-    task:        'Task',
-    timely:      'Timely'
-  };
-  
-  var topCat = Object.keys(catNames);
+
+  var q = (question || '').toLowerCase();
+  var catNames = {call:'Call',whatsapp:'WhatsApp',email:'Email',leadStage:'Lead Stage',outcome:'Outcome',deal:'Deal',task:'Task',followUp:'Follow Up'};
+  var topCat = ['call','whatsapp','email','leadStage','outcome','deal','task','followUp'];
+
   var dataset = HOF_filtered && HOF_filtered.length ? HOF_filtered : HOF_ALL;
-  var totalAud = dataset.reduce((s,d) => s + (d.audits||0), 0);
-  var avgPct   = dataset.length ? (dataset.reduce((s,d) => s + (d.pct||0), 0) / dataset.length).toFixed(1) : '0';
-  var atRisk   = dataset.filter(d => (d.pct||0) < 80).length;
-  
-  var catErrs = topCat.map(c => ({
-    name: catNames[c],
-    errs: dataset.reduce((s,d) => s + (d['catErr_'+c]||0), 0)
-  })).sort((a,b) => b.errs - a.errs);
-  
-  var currentLabel = document.getElementById('ltxt')?.textContent || 'Current Period';
-  var header = `HOF Dashboard | ${currentLabel} | Agents:${dataset.length} | Avg:${avgPct}% | AtRisk:${atRisk} | Audits:${totalAud}`;
-  var catLine = 'Top Errors: ' + catErrs.slice(0,5).map(c => `${c.name}:${c.errs}`).join(', ');
-  
-  var agentParts = dataset.slice()
-    .sort((a,b) => (a.pct||0) - (b.pct||0))
-    .map(d => {
-      var cats = topCat.filter(c => (d['catErr_'+c]||0) > 0)
-                       .map(c => `${catNames[c]}:${d['catErr_'+c]}`).join(',');
-      var sop = (d.mismatchQualNoDeal > 0) ? `|SOP:${d.mismatchQualNoDeal}` : '';
-      return `${d.name}|${(d.pct||0).toFixed(0)}%|${d.total||0}err|${d.audits||0}aud|${cats}${sop}`;
-    });
-    
-  return [header, catLine, '', 'Consultants:'].concat(agentParts).join('\n');
+  var totalAud = dataset.reduce(function(s,d){ return s+d.audits; },0);
+  var avgPct   = (dataset.reduce(function(s,d){ return s+d.pct; },0)/dataset.length).toFixed(1);
+  var atRisk   = dataset.filter(function(d){ return d.pct<80; }).length;
+  var catErrs  = topCat.map(function(c){ return {name:catNames[c],errs:dataset.reduce(function(s,d){ return s+(d['catErr_'+c]||0);},0)}; });
+  catErrs.sort(function(a,b){ return b.errs-a.errs; });
+  var currentLabel = (document.getElementById('ltxt') ? document.getElementById('ltxt').textContent : 'Current Period') || 'Current Period';
+
+  var header = 'HOF Dashboard | ' + currentLabel + ' | Agents:' + dataset.length + ' | Avg:' + avgPct + '% | AtRisk:' + atRisk + ' | Audits:' + totalAud;
+  var catLine = 'TopErrors: ' + catErrs.slice(0,4).map(function(c){ return c.name+':'+c.errs; }).join(', ');
+
+  var agentParts = dataset.slice().sort(function(a,b){ return a.pct-b.pct; }).map(function(d){
+    var cats = topCat.filter(function(c){ return (d['catErr_'+c]||0)>0; })
+                     .map(function(c){ return catNames[c]+':'+(d['catErr_'+c]); }).join(',');
+    var sop = d.mismatchQualNoDeal > 0 ? ('|SOP:'+d.mismatchQualNoDeal) : '';
+    var catPart = cats ? ('|'+cats) : '';
+    return d.name+'|'+d.pct.toFixed(0)+'%|'+d.total+'err|'+d.audits+'aud'+catPart+sop;
+  });
+
+  var lines = [header, catLine, '', 'Consultants:'].concat(agentParts);
+
+  var needsTrend = /improv|declin|trend|history|last month|previous|compar|progress|worst.*month|best.*month|month.over/i.test(q);
+  if (needsTrend) {
+    var hasTrend = HOF_ALL.some(function(d){ return d.trend && d.trend.length > 1; });
+    if (hasTrend) {
+      var improved = HOF_ALL.map(function(d){
+        if (!d.trend || d.trend.length < 2) return null;
+        var last = d.trend[d.trend.length-1];
+        var prev = d.trend[d.trend.length-2];
+        var delta = ((last.pct||0) - (prev.pct||0)).toFixed(1);
+        var sign = parseFloat(delta) > 0 ? '+' : '';
+        return d.name + ': ' + sign + delta + '% (' + (prev.month||'prev') + ' to ' + (last.month||'last') + ')';
+      }).filter(Boolean);
+      improved.sort(function(a,b){ return parseFloat(b.split(': ')[1]) - parseFloat(a.split(': ')[1]); });
+      lines.push('');
+      lines.push('Trend (latest vs prev month):');
+      improved.forEach(function(x){ lines.push(x); });
+    }
+  }
+
+  return lines.join('\n');
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -5141,7 +5614,7 @@ function scrollAIToBottom() {
 // ══════════════════════════════════════════════════════════════════
 //  DEALS — Apps Script endpoint (deployed, no public sheet needed)
 // ══════════════════════════════════════════════════════════════════
-const DEALS_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbww96DtE2-Ui1C_y5iXg_ZwgOZJ4WFUwLg3Dy8EL8_2GBf8AgYOTPxdMhazW_24wNLTiA/exec';
+const DEALS_APPS_SCRIPT_URL = 'https://script.googleusercontent.com/a/macros/hofmigration.com/echo?user_content_key=AWDtjMVsHqmx8rk_fNTZsKAOc4DkqhV62LhuyH5GbVp4MA0_66gvBukhbI7NglvGCBn61ZkI1pQ1MLBIbFiQOxiqYhA5cnHgqWSW3toL3-EHfQvLd5_VcOq9EztZHitBI7wOiWqAL283bXTnCj8dOsX5mXycBB4APF9NdHQgnyIG2UDq2TZpC49yP-My8a1VhEv_-ROG9dw2GhJccuOaQjstOKP7TLbUbrY-rF5ApCCN037cshyoXnfqIMXol4md1yb-hg5wsnkyXJm7uHbZTWnpLMSGqTKykYANTUz1IqE-3O7clEy_aJ858Eh9m_ZMfQ&lib=MM24DuhvXS4QO0ry8prKPWHpNs2xkhEAc';
 
 // Fallback: direct CSV if Apps Script fails
 const DEALS_SHEET_ID = '1K07taCArn1qEIjTyWwXJUYnvIc9f72kWHSRUTPTlCqM';
@@ -5820,7 +6293,6 @@ function startAutoRefresh() {
   }, AUTO_REFRESH_MS);
 }
 startAutoRefresh();
-window.addEventListener('load', () => hofFetch());
 </script>
 </body>
 </html>
