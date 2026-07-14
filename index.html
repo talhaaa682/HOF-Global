@@ -26,7 +26,7 @@ input[type=checkbox]{accent-color:#4f46e5}
 <body class="min-h-screen bg-slate-50 text-slate-800">
 
 <script>
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKplUYRN7VnT73IfckvIewJU0cyvBkYTmSvo5623LQqOhRDpKANmKYNwOKKRSLl7_hFA/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/a/macros/hofmigration.com/s/AKfycbxz2fbq157feNTv9Lm7wfa-32e-vDhb-FW-Okauro-VjXEtrPsjVU-VUzkyNmAmh8LT/exec";
 const USE_GOOGLE_SHEETS = true;
 </script>
 
@@ -48,6 +48,15 @@ const USE_GOOGLE_SHEETS = true;
 <button onclick="exportReport()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">Export</button>
 </div>
 </nav>
+
+<div id="syncBanner" class="hidden bg-red-50 border-b border-red-200 text-red-700 text-sm px-6 py-2.5 flex items-center justify-between gap-3">
+<span id="syncBannerText"></span>
+<div class="flex items-center gap-3 shrink-0">
+<button onclick="saveAllData()" class="text-xs font-semibold underline hover:no-underline">Retry save</button>
+<button onclick="loadFromSheets()" class="text-xs font-semibold underline hover:no-underline">Retry load</button>
+<button onclick="dismissSyncBanner()" class="text-red-400 hover:text-red-600 text-base leading-none">&times;</button>
+</div>
+</div>
 
 <div class="flex">
 <aside class="w-64 bg-white border-r border-slate-200 min-h-screen p-4 hidden lg:block">
@@ -176,6 +185,26 @@ const ALERT_THRESHOLD = 70;   // composite below this raises a risk alert on Ale
 const AVATAR_COLORS = ['bg-indigo-100 text-indigo-700','bg-emerald-100 text-emerald-700','bg-amber-100 text-amber-700','bg-rose-100 text-rose-700','bg-sky-100 text-sky-700','bg-violet-100 text-violet-700'];
 const VIEWS = ['overview','qa-checklist','trends','leaderboard','product-line','consultants','certification','alerts'];
 
+/* AI summary (Alerts & Tasks) — calls Groq's OpenAI-compatible chat
+   completions API directly from the browser. That means GROQ_API_KEY is
+   visible to anyone who opens dev tools on this page — fine for an
+   internal-only tool used by trusted staff, but if this dashboard is ever
+   made public, route this call through a small serverless proxy instead so
+   the key never reaches the browser.
+   Model: llama-3.3-70b-versatile is being retired by Groq (shutdown
+   08/16/26), so this defaults to its recommended replacement,
+   openai/gpt-oss-120b. qwen/qwen3.6-27b is Groq's other suggested option
+   if you'd rather try that instead. */
+const USE_AI_SUMMARY = true;
+const GROQ_API_KEY = 'YOUR_GROQ_API_KEY_HERE';   // paste your key, or inject it at build/deploy time
+const GROQ_MODEL   = 'openai/gpt-oss-120b';      // check console.groq.com/docs/models if you want to change this
+const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+
+/* Local safety net so edits survive a refresh even when the Google Sheets
+   sync below is down or misconfigured. Google Sheets stays the shared
+   source of truth for the team; this cache is per-browser only. */
+const LOCAL_CACHE_KEY = 'hof_qa_dashboard_cache_v1';
+
 const CHS_ITEMS = [
   'Maintains chest register / authority voice throughout call',
   'Pace controlled at 130-150 WPM (not rushed)',
@@ -209,8 +238,10 @@ const CES_ITEMS = [
 const ROADMAP_ITEMS = ['Building Rapport', 'Qualifying Client', 'Presentation', 'Closing'];
 
 /* ============ STATE ============
-   In-memory only for the life of this page load (never localStorage — see saveAllData/loadFromSheets
-   for the Google Sheets sync, which is the real persistence layer for this app). */
+   Lives in memory while the page is open. Google Sheets (via GOOGLE_SCRIPT_URL)
+   is the real shared persistence layer for the whole team; a per-browser
+   localStorage cache (see cacheLocally/loadLocalCache below) is a safety net
+   so a refresh never loses edits even if the Sheets sync is down. */
 let state = {
   period: 'today',
   currentView: 'overview',
@@ -231,7 +262,6 @@ let state = {
 };
 let charts = {};
 let checklistSearch = '';
-let aiSummaryState = { loading:false, text:'', error:'' };
 
 /* ============ HELPERS ============ */
 function todayISO(){
@@ -643,6 +673,82 @@ function renderCertification(){
       + '</tbody></table></div>' : emptyState('No consultants yet','Add consultants to start tracking certification readiness.'));
 }
 
+/* ============ AI SUMMARY (Alerts & Tasks) ============
+   Manual trigger only (button click) so it never fires — and never costs
+   anything — without the manager asking for it. */
+let aiSummary = { fp: null, text: '', error: '', loading: false };
+
+function computeAlertsFingerprint(alerts){
+  return alerts.map(function(e){ return e.id + ':' + composite(e); }).join('|');
+}
+function aiKeyConfigured(){
+  return !!GROQ_API_KEY && GROQ_API_KEY.indexOf('YOUR_') !== 0;
+}
+function aiSummaryBlockHtml(alerts){
+  if(!alerts.length || !USE_AI_SUMMARY) return '';
+  const fp = computeAlertsFingerprint(alerts);
+  if(aiSummary.loading){
+    return '<div class="bg-white rounded-xl border border-indigo-100 p-4 mb-4 shadow-sm flex items-center gap-2 text-sm text-slate-500">'
+      + '<span class="w-3 h-3 border-2 border-indigo-300 border-t-indigo-600 rounded-full animate-spin inline-block"></span>Generating AI summary...</div>';
+  }
+  if(aiSummary.text && aiSummary.fp === fp){
+    return '<div class="bg-gradient-to-br from-indigo-50 to-white border border-indigo-100 rounded-xl p-4 mb-4 shadow-sm fade-in">'
+      + '<div class="flex items-center justify-between mb-2"><h3 class="text-sm font-semibold text-indigo-700 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-500 inline-block"></span>AI Summary</h3><button onclick="generateAlertsSummary()" class="text-xs font-medium text-indigo-500 hover:text-indigo-700">Regenerate</button></div>'
+      + '<div class="text-sm text-slate-700 whitespace-pre-line leading-relaxed">'+esc(aiSummary.text)+'</div></div>';
+  }
+  if(aiSummary.error){
+    return '<div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-4 text-sm text-amber-700 flex items-center justify-between gap-3 flex-wrap">'
+      + '<span>'+esc(aiSummary.error)+'</span><button onclick="generateAlertsSummary()" class="text-xs font-semibold text-amber-800 underline whitespace-nowrap">Try again</button></div>';
+  }
+  return '<div class="bg-white rounded-xl border border-slate-200 p-4 mb-4 shadow-sm flex items-center justify-between gap-3 flex-wrap">'
+    + '<p class="text-sm text-slate-500">Skip the manual scan &mdash; summarize today\'s '+alerts.length+' flagged review'+(alerts.length===1?'':'s')+' into one quick brief.</p>'
+    + '<button onclick="generateAlertsSummary()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3 py-2 rounded-lg whitespace-nowrap">Generate AI Summary</button></div>';
+}
+function generateAlertsSummary(){
+  const alerts = activeAlertEntries();
+  if(!alerts.length || aiSummary.loading) return;
+  if(!aiKeyConfigured()){
+    aiSummary = { fp:null, text:'', error:'Add your Groq API key to GROQ_API_KEY near the top of the script to turn this on.', loading:false };
+    renderAlerts();
+    return;
+  }
+  const fp = computeAlertsFingerprint(alerts);
+  aiSummary = { fp:null, text:'', error:'', loading:true };
+  renderAlerts();
+
+  const lines = alerts.map(function(e){
+    const c = consultantById(e.consultantId);
+    const unmet = unmetItems(e);
+    return (c?c.name:'Unknown consultant')+' - '+(e.customerName||'unnamed client')+' ('+(e.product||'unspecified product')+'), composite '+composite(e)+'. Unmet items: '+(unmet.length?unmet.join('; '):'none listed');
+  }).join('\n');
+
+  fetch(GROQ_API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + GROQ_API_KEY },
+    body: JSON.stringify({
+      model: GROQ_MODEL,
+      temperature: 0.3,
+      max_tokens: 600,
+      messages: [
+        { role:'system', content:'You are a QA operations assistant for an immigration consultancy call center. You are given a raw list of flagged QA reviews (below the passing composite threshold) with the specific checklist items each one failed. Write a short brief a manager can scan in under a minute: group repeat issues together, call out any consultant with more than one flagged review, and end with 2-4 concrete next actions. Plain text, short paragraphs or a simple dash list - no markdown headers or tables.' },
+        { role:'user', content: lines }
+      ]
+    })
+  }).then(function(res){
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    return res.json();
+  }).then(function(data){
+    const text = data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
+    if(!text) throw new Error('Empty response from model');
+    aiSummary = { fp: fp, text: text.trim(), error:'', loading:false };
+  }).catch(function(err){
+    console.warn('AI summary failed:', err);
+    aiSummary = { fp:null, text:'', error:'Could not generate a summary ('+err.message+'). This is usually a CORS block from calling Groq directly from the browser - see the setup notes for a serverless proxy workaround. Try again, or scan the gaps listed below.', loading:false };
+  }).finally(function(){
+    renderAlerts();
+  });
+}
+
 /* ============ ALERTS & TASKS (RISK FLAGS) ============ */
 function activeAlertEntries(){
   return state.entries.filter(e=>composite(e)<ALERT_THRESHOLD && !state.resolvedAlerts.includes(e.id)).sort((a,b)=>b.date.localeCompare(a.date));
@@ -657,10 +763,8 @@ function updateAlertBadge(){
 function renderAlerts(){
   const el = document.getElementById('view-alerts');
   const alerts = activeAlertEntries();
-  el.innerHTML = '<div class="mb-6 flex items-center justify-between gap-3 flex-wrap"><div><h2 class="text-2xl font-bold text-slate-800">Alerts & Tasks</h2><p class="text-sm text-slate-500">QA reviews scoring below '+ALERT_THRESHOLD+' composite &mdash; flagged as elevated risk</p></div>'
-    + (alerts.length ? '<button onclick="requestAiSummary()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-sm whitespace-nowrap">\u2728 Summarize with AI</button>' : '')
-    + '</div>'
-    + renderAiSummaryCard()
+  el.innerHTML = '<div class="mb-6"><h2 class="text-2xl font-bold text-slate-800">Alerts & Tasks</h2><p class="text-sm text-slate-500">QA reviews scoring below '+ALERT_THRESHOLD+' composite &mdash; flagged as elevated risk</p></div>'
+    + aiSummaryBlockHtml(alerts)
     + (alerts.length ? '<div class="space-y-3">'+alerts.map(e=>{
         const c = consultantById(e.consultantId);
         const unmet = unmetItems(e);
@@ -679,49 +783,7 @@ function resolveAlert(id){
   renderAlerts();
   updateAlertBadge();
   toast('Alert resolved.', 'success');
-}
-
-/* ============ AI RISK SUMMARY (Groq, proxied through Apps Script) ============
-   The Groq key never touches this file or the browser: requestAiSummary() posts
-   to the same GOOGLE_SCRIPT_URL with action:'summarize', and Apps Script reads
-   the key server-side from Script Properties before calling Groq. See Code.gs. */
-function renderAiSummaryCard(){
-  if(!aiSummaryState.loading && !aiSummaryState.text && !aiSummaryState.error) return '';
-  let inner;
-  if(aiSummaryState.loading){
-    inner = '<div class="flex items-center gap-2 text-sm text-indigo-700"><span class="w-3 h-3 rounded-full border-2 border-indigo-300 border-t-indigo-600 animate-spin inline-block"></span>Summarizing with AI…</div>';
-  } else if(aiSummaryState.error){
-    inner = '<p class="text-sm text-red-600">'+esc(aiSummaryState.error)+'</p>';
-  } else {
-    inner = '<div class="text-sm text-slate-700 whitespace-pre-line leading-relaxed">'+esc(aiSummaryState.text)+'</div>';
-  }
-  return '<div class="bg-indigo-50 border border-indigo-100 rounded-xl p-4 mb-4">'
-    + '<div class="flex items-center justify-between mb-2"><p class="text-xs font-semibold text-indigo-700 uppercase tracking-wide">AI Summary</p>'+(aiSummaryState.loading?'':'<button onclick="requestAiSummary()" class="text-xs text-indigo-600 hover:text-indigo-800">Regenerate</button>')+'</div>'
-    + inner + '</div>';
-}
-function requestAiSummary(){
-  const alerts = activeAlertEntries();
-  if(!alerts.length) return;
-  aiSummaryState = { loading:true, text:'', error:'' };
-  renderAlerts();
-  const payload = {
-    action: 'summarize',
-    alerts: alerts.map(function(e){
-      const c = consultantById(e.consultantId);
-      return { consultant: c?c.name:'Unknown', customer: e.customerName||'', date: e.date, composite: composite(e), gaps: unmetItems(e) };
-    })
-  };
-  fetch(GOOGLE_SCRIPT_URL, { method:'POST', body: JSON.stringify(payload) })
-    .then(function(res){ if(!res.ok) throw new Error('HTTP '+res.status); return res.json(); })
-    .then(function(data){
-      if(data && data.summary){ aiSummaryState = { loading:false, text:data.summary, error:'' }; }
-      else { aiSummaryState = { loading:false, text:'', error:(data && data.error) || 'No summary returned.' }; }
-    })
-    .catch(function(err){
-      aiSummaryState = { loading:false, text:'', error:'Could not reach the AI summary service. Check that Code.gs is deployed with a GROQ_API_KEY set.' };
-      console.warn('AI summary failed:', err);
-    })
-    .finally(function(){ renderAlerts(); });
+  syncToSheets(false);
 }
 
 /* ============ QA ENTRY MODAL ============ */
@@ -926,6 +988,40 @@ function toast(msg, type){
      doGet(e):  if e.parameter.action === 'load', return JSON {consultants:[...], entries:[...]}
    If your deployed Apps Script uses a different contract, tell me its expected
    request/response shape (or paste the script) and I'll match it exactly. */
+function cacheLocally(){
+  try {
+    localStorage.setItem(LOCAL_CACHE_KEY, JSON.stringify({
+      consultants: state.consultants,
+      entries: state.entries,
+      resolvedAlerts: state.resolvedAlerts,
+      savedAt: new Date().toISOString()
+    }));
+  } catch(err){
+    console.warn('Local cache write failed (ok to ignore if browser storage is unavailable):', err);
+  }
+}
+function loadLocalCache(){
+  try {
+    const raw = localStorage.getItem(LOCAL_CACHE_KEY);
+    if(!raw) return null;
+    const parsed = JSON.parse(raw);
+    if(parsed && Array.isArray(parsed.consultants) && Array.isArray(parsed.entries)){
+      parsed.resolvedAlerts = Array.isArray(parsed.resolvedAlerts) ? parsed.resolvedAlerts : [];
+      return parsed;
+    }
+  } catch(err){
+    console.warn('Local cache read failed:', err);
+  }
+  return null;
+}
+function showSyncBanner(msg){
+  const b = document.getElementById('syncBanner');
+  document.getElementById('syncBannerText').textContent = msg;
+  b.classList.remove('hidden');
+}
+function dismissSyncBanner(){
+  document.getElementById('syncBanner').classList.add('hidden');
+}
 function setSyncStatus(s){
   const el = document.getElementById('syncStatus');
   const map = {
@@ -939,23 +1035,30 @@ function setSyncStatus(s){
 }
 function saveAllData(){ syncToSheets(true); }
 function syncToSheets(manual){
+  cacheLocally();
   if(!USE_GOOGLE_SHEETS || !GOOGLE_SCRIPT_URL){ if(manual) toast('Saved locally. Google Sheets sync is off.', 'success'); return; }
   setSyncStatus('saving');
   fetch(GOOGLE_SCRIPT_URL, {
     method:'POST',
-    body: JSON.stringify({ action:'save', consultants: state.consultants, entries: state.entries })
+    body: JSON.stringify({ action:'save', consultants: state.consultants, entries: state.entries, resolvedAlerts: state.resolvedAlerts })
   }).then(function(res){
     if(!res.ok) throw new Error('HTTP '+res.status);
     setSyncStatus('synced');
+    dismissSyncBanner();
     if(manual) toast('Saved to Google Sheets.', 'success');
   }).catch(function(err){
     setSyncStatus('error');
     if(manual) toast('Could not reach Google Sheets — your changes are still saved in this session.', 'error');
+    else showSyncBanner('Your last change did not sync to Google Sheets. It is saved locally in this browser, but fix the connection so the rest of the team sees it too.');
     console.warn('Sheets sync failed:', err);
   });
 }
 function loadFromSheets(){
-  if(!USE_GOOGLE_SHEETS || !GOOGLE_SCRIPT_URL){ setSyncStatus('offline'); renderCurrentView(); updateAlertBadge(); return; }
+  if(!USE_GOOGLE_SHEETS || !GOOGLE_SCRIPT_URL){
+    const cached = loadLocalCache();
+    if(cached){ state.consultants = cached.consultants; state.entries = cached.entries; state.resolvedAlerts = cached.resolvedAlerts || []; }
+    setSyncStatus('offline'); renderCurrentView(); updateAlertBadge(); return;
+  }
   setSyncStatus('saving');
   fetch(GOOGLE_SCRIPT_URL + '?action=load').then(function(res){
     if(!res.ok) throw new Error('HTTP '+res.status);
@@ -964,11 +1067,23 @@ function loadFromSheets(){
     if(data && Array.isArray(data.consultants) && Array.isArray(data.entries)){
       state.consultants = data.consultants;
       state.entries = data.entries;
+      state.resolvedAlerts = Array.isArray(data.resolvedAlerts) ? data.resolvedAlerts : [];
+      cacheLocally();
     }
     setSyncStatus('synced');
+    dismissSyncBanner();
   }).catch(function(err){
     setSyncStatus('offline');
     console.warn('Could not load from Google Sheets, using local data:', err);
+    const cached = loadLocalCache();
+    if(cached){
+      state.consultants = cached.consultants;
+      state.entries = cached.entries;
+      state.resolvedAlerts = cached.resolvedAlerts || [];
+      showSyncBanner('Could not reach Google Sheets — showing your local backup from this browser instead. Fix the connection when you can so the whole team stays in sync.');
+    } else {
+      showSyncBanner('Could not reach Google Sheets and no local backup was found — showing sample starter data. Check GOOGLE_SCRIPT_URL and your Apps Script deployment.');
+    }
   }).finally(function(){
     renderCurrentView();
     updateAlertBadge();
